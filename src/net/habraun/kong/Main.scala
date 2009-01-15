@@ -87,14 +87,8 @@ object Main {
 		paddleNodes.foreach((node) => canvas.getLayer.addChild(node))
 
 		// Initialize the ball
-		val ball = new Body(new Circle(Ball.radius), Ball.mass)
-		ball.setPosition(screenSizeX / 2, screenSizeY / 2)
-		ball.setDamping(0)
-		ball.setFriction(0)
-		ball.setRestitution(1)
-		ball.setRotatable(false)
-		val r = new Random
-		ball.adjustVelocity(new Vector2f(100, -100))
+		val ball = new Ball(screenSizeX / 2, screenSizeY / 2)
+		ball.init
 
 		// Initialize the scene graph node for the ball
 		val ballShape = new Ellipse2D.Double(0, 0, Ball.radius * 2, Ball.radius * 2)
@@ -117,7 +111,7 @@ object Main {
 		// Initialize world for physics simulation and add all bodies
 		val world = new World(new Vector2f(0, 0), 10)
 		paddles.foreach((paddle) => world.add(paddle.body))
-		world.add(ball)
+		world.add(ball.body)
 		world.add(topBorder)
 		world.add(bottomBorder)
 
@@ -141,12 +135,12 @@ object Main {
 			world.step
 
 			// Check if the ball left the field and needs to be placed in the middle again
-			val  ballX = ball.getPosition.getX
+			val  ballX = ball.body.getPosition.getX
 			if (ballX > screenSizeX) {
-				ball.setPosition(screenSizeX / 2, screenSizeY / 2)
+				ball.init
 			}
 			if (ballX < 0) {
-				ball.setPosition(screenSizeX / 2, screenSizeY / 2)
+				ball.init
 			}
 
 			// Display game state
@@ -159,7 +153,7 @@ object Main {
 					paddleNodes(i).setTransform(AffineTransform.getTranslateInstance(x, y))
 				}
 
-				val position = ball.getPosition
+				val position = ball.body.getPosition
 				val x = position.getX - Ball.radius
 				val y = position.getY - Ball.radius
 				ballNode.setTransform(AffineTransform.getTranslateInstance(x, y))

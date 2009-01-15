@@ -20,6 +20,41 @@ package net.habraun.kong
 
 
 
+import net.phys2d.math._
+import net.phys2d.raw._
+import net.phys2d.raw.shapes._
+
+
+
+class Ball(startingX: Int, startingY: Int) {
+	
+	private val r = new Random
+
+	val body = new Body(new Circle(Ball.radius), Ball.mass)
+	body.setDamping(0)
+	body.setFriction(0)
+	body.setRestitution(1)
+	body.setRotatable(false)
+
+
+
+	def init {
+		val mod = (r: Random) => (r.nextInt(2) + 1) * 2 - 3 // result: -1 or +1
+		val vel = (r: Random) => r.nextInt(101) + 100	// result: 100-200
+
+		val xMod = mod(r)
+		val yMod = mod(r)
+		val xVel = xMod * vel(r)
+		val yVel = yMod * vel(r)
+
+		body.adjustVelocity(new Vector2f(body.getVelocity).negate)
+		body.adjustVelocity(new Vector2f(xVel, yVel))
+		body.setPosition(startingX, startingY)
+	}
+}
+
+
+
 object Ball {
 	val radius = 5
 	val mass = 1
