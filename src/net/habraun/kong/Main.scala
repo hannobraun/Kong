@@ -28,15 +28,6 @@ import edu.umd.cs.piccolo.nodes._
 
 
 
-abstract case class Key
-case object WKey extends Key
-case object SKey extends Key
-case object UpKey extends Key
-case object DownKey extends Key
-case object NoKey extends Key
-
-
-
 object Main {
 
 	val screenSizeX = 800
@@ -47,25 +38,38 @@ object Main {
 
 
 	def main(args: Array[String]) {
+		// Configure the main window.
 		val frame = new JFrame("Kong 0.2")
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
 		frame.setSize(800, 600)
 
+		// Configure the canvas where the scene graph is painted on.
 		val canvas = new PCanvas
 		canvas.removeInputEventListener(canvas.getZoomEventHandler)
 		canvas.removeInputEventListener(canvas.getPanEventHandler)
 		frame.add(canvas)
-		
+
+		// Configure the background color.
 		val background = PPath.createRectangle(0, 0, screenSizeX, screenSizeY)
 		background.setPaint(Color.ORANGE)
 		canvas.getLayer.addChild(background)
 
+		// Configure the middle line.
 		val middleLine = PPath.createRectangle(screenSizeX / 2 - 1, 0, 2, screenSizeY)
 		middleLine.setPaint(Color.RED)
 		middleLine.setStroke(defaultStroke)
 		canvas.getLayer.addChild(middleLine)
 
+		// Configure the input handler
+		val inputHandler = new InputHandler
+		canvas.getRoot.getDefaultInputManager.setKeyboardFocus(inputHandler)
+
 		frame.setVisible(true)
+
+		while (true) {
+			Console.println(inputHandler.isUpPressed(0))
+			Thread.sleep(50)
+		}
 	}
 		
 }
