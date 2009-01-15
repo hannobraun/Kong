@@ -20,6 +20,14 @@ package net.habraun.kong
 
 
 
+import java.awt._
+import javax.swing._
+
+import edu.umd.cs.piccolo._
+import edu.umd.cs.piccolo.nodes._
+
+
+
 abstract case class Key
 case object WKey extends Key
 case object SKey extends Key
@@ -31,8 +39,33 @@ case object NoKey extends Key
 
 object Main {
 
+	val screenSizeX = 800
+	val screenSizeY = 600
+
+	val defaultStroke = new BasicStroke(0)
+
+
+
 	def main(args: Array[String]) {
-		Console.println("Kong is temporarily out of order.")
+		val frame = new JFrame("Kong 0.2")
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+		frame.setSize(800, 600)
+
+		val canvas = new PCanvas
+		canvas.removeInputEventListener(canvas.getZoomEventHandler)
+		canvas.removeInputEventListener(canvas.getPanEventHandler)
+		frame.add(canvas)
+		
+		val background = PPath.createRectangle(0, 0, screenSizeX, screenSizeY)
+		background.setPaint(Color.ORANGE)
+		canvas.getLayer.addChild(background)
+
+		val middleLine = PPath.createRectangle(screenSizeX / 2 - 1, 0, 2, screenSizeY)
+		middleLine.setPaint(Color.RED)
+		middleLine.setStroke(defaultStroke)
+		canvas.getLayer.addChild(middleLine)
+
+		frame.setVisible(true)
 	}
 		
 }
