@@ -54,6 +54,6 @@ class Paddle(initialX: Float, initialY: Float) {
 
 
 object Paddle {
-	val radius = 50
+	val radius = 30
 	val speed = 100000
 }

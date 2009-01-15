@@ -28,6 +28,7 @@ import edu.umd.cs.piccolo._
 import edu.umd.cs.piccolo.nodes._
 import net.phys2d.math._
 import net.phys2d.raw._
+import net.phys2d.raw.shapes._
 
 
 
@@ -70,17 +71,25 @@ object Main {
 		canvas.getRoot.getDefaultInputManager.setKeyboardFocus(inputHandler)
 
 		// Initialize paddles
-		val paddleInitialY= screenSizeY / 2 - Paddle.radius
-		val paddle1 = new Paddle(border, paddleInitialY)
-		val paddle2 = new Paddle(screenSizeX - border - Paddle.radius, paddleInitialY)
+		val paddle1 = new Paddle(border + Paddle.radius, screenSizeY / 2)
+		val paddle2 = new Paddle(screenSizeX - border - Paddle.radius, screenSizeY / 2)
 		val paddles = paddle1::paddle2::Nil
 
-		// Initialize world for physics simulation and add all bodies
+		// Initialize world for physics simulation and add the paddles
 		val world = new World(new Vector2f(0, 0), 10)
 		paddles.foreach((paddle) => world.add(paddle.body))
 
+		// Initialize the borders
+		val borderShape = new Line(screenSizeX, 0)
+		val topBorder = new StaticBody(borderShape)
+		val bottomBorder = new StaticBody(borderShape)
+		topBorder.setPosition(0, 0)
+		bottomBorder.setPosition(0, screenSizeY)
+		world.add(topBorder)
+		world.add(bottomBorder)
+
 		// Initialize graphic objects
-		val shape = new Ellipse2D.Double(0, 0, Paddle.radius, Paddle.radius)
+		val shape = new Ellipse2D.Double(0, 0, Paddle.radius * 2, Paddle.radius * 2)
 		val paddleNodes = paddles.map((paddle) => {
 			val node = new PPath(shape)
 			node.setPaint(Color.RED)
@@ -108,12 +117,16 @@ object Main {
 
 			world.step
 
+			Console.println(paddle2.body.getPosition)
+
 			// Display game state
 			for (i <- 0 until paddles.length) {
 				SwingUtilities.invokeLater(new Runnable { def run {
 					val position = paddles(i).body.getPosition
-					paddleNodes(i).setTransform(AffineTransform.getTranslateInstance(position.getX,
-							position.getY))
+					val x = position.getX - Paddle.radius
+					val y = position.getY - Paddle.radius
+
+					paddleNodes(i).setTransform(AffineTransform.getTranslateInstance(x, y))
 				}})
 			}
 
