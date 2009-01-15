@@ -30,7 +30,7 @@ class Paddle(initialX: Float, initialY: Float) {
 	val body = new Body(new Circle(Paddle.radius), 100)
 	body.setPosition(initialX, initialY)
 	body.setMaxVelocity(0, 1000000)
-	body.setDamping(2)
+	body.setDamping(5)
 	body.setRestitution(1)
 	body.setRotatable(false)
 
@@ -57,5 +57,5 @@ class Paddle(initialX: Float, initialY: Float) {
 
 object Paddle {
 	val radius = 30
-	val speed = 100000
+	val speed = 300000
 }
