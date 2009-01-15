@@ -40,12 +40,12 @@ class Ball(startingX: Int, startingY: Int) {
 
 	def init {
 		val mod = (r: Random) => (r.nextInt(2) + 1) * 2 - 3 // result: -1 or +1
-		val vel = (r: Random) => r.nextInt(101) + 100	// result: 100-200
+		val vel = (r: Random, factor: Double) => r.nextInt(101) + 100	// result: 100-200 * factor
 
 		val xMod = mod(r)
 		val yMod = mod(r)
-		val xVel = xMod * vel(r)
-		val yVel = yMod * vel(r)
+		val xVel = xMod * vel(r, 1.5)
+		val yVel = yMod * vel(r, 1)
 
 		body.adjustVelocity(new Vector2f(body.getVelocity).negate)
 		body.adjustVelocity(new Vector2f(xVel, yVel))
