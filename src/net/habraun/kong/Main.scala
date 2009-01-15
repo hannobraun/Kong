@@ -137,7 +137,17 @@ object Main {
 				}
 			}
 
+			// Step the physics simulation
 			world.step
+
+			// Check if the ball left the field and needs to be placed in the middle again
+			val  ballX = ball.getPosition.getX
+			if (ballX > screenSizeX) {
+				ball.setPosition(screenSizeX / 2, screenSizeY / 2)
+			}
+			if (ballX < 0) {
+				ball.setPosition(screenSizeX / 2, screenSizeY / 2)
+			}
 
 			// Display game state
 			SwingUtilities.invokeLater(new Runnable { def run {
