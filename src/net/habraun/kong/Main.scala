@@ -75,9 +75,33 @@ object Main {
 		val paddle2 = new Paddle(screenSizeX - border - Paddle.radius, screenSizeY / 2)
 		val paddles = paddle1::paddle2::Nil
 
-		// Initialize world for physics simulation and add the paddles
-		val world = new World(new Vector2f(0, 0), 10)
-		paddles.foreach((paddle) => world.add(paddle.body))
+		// Initialize scene graph nodes for paddles
+		val paddleShape = new Ellipse2D.Double(0, 0, Paddle.radius * 2, Paddle.radius * 2)
+		val paddleNodes = paddles.map((paddle) => {
+			val node = new PPath(paddleShape)
+			node.setPaint(Color.RED)
+			node.setStroke(defaultStroke)
+
+			node
+		})
+		paddleNodes.foreach((node) => canvas.getLayer.addChild(node))
+
+		// Initialize the ball
+		val ball = new Body(new Circle(Ball.radius), Ball.mass)
+		ball.setPosition(screenSizeX / 2, screenSizeY / 2)
+		ball.setDamping(0)
+		ball.setFriction(0)
+		ball.setRestitution(1)
+		ball.setRotatable(false)
+		val r = new Random
+		ball.adjustVelocity(new Vector2f(100, -100))
+
+		// Initialize the scene graph node for the ball
+		val ballShape = new Ellipse2D.Double(0, 0, Ball.radius * 2, Ball.radius * 2)
+		val ballNode = new PPath(ballShape)
+		ballNode.setPaint(Color.RED)
+		ballNode.setStroke(defaultStroke)
+		canvas.getLayer.addChild(ballNode)
 
 		// Initialize the borders
 		val borderShape = new Line(screenSizeX, 0)
@@ -85,19 +109,17 @@ object Main {
 		val bottomBorder = new StaticBody(borderShape)
 		topBorder.setPosition(0, 0)
 		bottomBorder.setPosition(0, screenSizeY)
+		topBorder.setFriction(0)
+		bottomBorder.setFriction(0)
+		topBorder.setRestitution(1)
+		bottomBorder.setRestitution(1)
+
+		// Initialize world for physics simulation and add all bodies
+		val world = new World(new Vector2f(0, 0), 10)
+		paddles.foreach((paddle) => world.add(paddle.body))
+		world.add(ball)
 		world.add(topBorder)
 		world.add(bottomBorder)
-
-		// Initialize graphic objects
-		val shape = new Ellipse2D.Double(0, 0, Paddle.radius * 2, Paddle.radius * 2)
-		val paddleNodes = paddles.map((paddle) => {
-			val node = new PPath(shape)
-			node.setPaint(Color.RED)
-			node.setStroke(defaultStroke)
-
-			node
-		})
-		paddleNodes.foreach((node) => canvas.getLayer.addChild(node))
 
 		frame.setVisible(true)
 
@@ -117,18 +139,21 @@ object Main {
 
 			world.step
 
-			Console.println(paddle2.body.getPosition)
-
 			// Display game state
-			for (i <- 0 until paddles.length) {
-				SwingUtilities.invokeLater(new Runnable { def run {
+			SwingUtilities.invokeLater(new Runnable { def run {
+				for (i <- 0 until paddles.length) {
 					val position = paddles(i).body.getPosition
 					val x = position.getX - Paddle.radius
 					val y = position.getY - Paddle.radius
 
 					paddleNodes(i).setTransform(AffineTransform.getTranslateInstance(x, y))
-				}})
-			}
+				}
+
+				val position = ball.getPosition
+				val x = position.getX - Ball.radius
+				val y = position.getY - Ball.radius
+				ballNode.setTransform(AffineTransform.getTranslateInstance(x, y))
+			}})
 
 			Thread.sleep(17)
 		}
