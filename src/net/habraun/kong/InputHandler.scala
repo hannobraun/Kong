@@ -56,9 +56,9 @@ object InputHandler {
 
 	val playerKeys = new Array[Array[Int]](2, 2)
 
-	playerKeys(0)(0) = KeyEvent.VK_UP
-	playerKeys(0)(1) = KeyEvent.VK_DOWN
+	playerKeys(0)(0) = KeyEvent.VK_W
+	playerKeys(0)(1) = KeyEvent.VK_S
 
-	playerKeys(1)(0) = KeyEvent.VK_W
-	playerKeys(1)(1) = KeyEvent.VK_S
+	playerKeys(1)(0) = KeyEvent.VK_UP
+	playerKeys(1)(1) = KeyEvent.VK_DOWN
 }

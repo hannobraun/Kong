@@ -19,22 +19,37 @@
 package net.habraun.kong
 
 
+import net.phys2d.math._
+import net.phys2d.raw._
+import net.phys2d.raw.shapes._
 
-class Paddle {
+
+
+class Paddle(initialX: Float, initialY: Float) {
+
+	val body = new StaticBody(new Circle(Paddle.radius))
+	body.setPosition(initialX, initialY)
+
+
 
 	def movementUp {
-		Console.println("Moving up.")
+		val newPosition = new Vector2f(body.getPosition)
+		newPosition.add(new Vector2f(0, -Paddle.speed))
+		body.setPosition(newPosition.x, newPosition.y)
 	}
 
 
 
 	def movementDown {
-		Console.println("Moving down.")
+		val newPosition = new Vector2f(body.getPosition)
+		newPosition.add(new Vector2f(0, Paddle.speed))
+		body.setPosition(newPosition.x, newPosition.y)
 	}
+}
 
 
 
-	def movementStop {
-		Console.println("Movement stopped.")
-	}
+object Paddle {
+	val radius = 50
+	val speed = 5
 }
