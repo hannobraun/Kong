@@ -27,23 +27,27 @@ import net.phys2d.raw.shapes._
 
 class Paddle(initialX: Float, initialY: Float) {
 
-	val body = new StaticBody(new Circle(Paddle.radius))
+	val body = new Body(new Circle(Paddle.radius), 100)
 	body.setPosition(initialX, initialY)
+	body.setMaxVelocity(0, 1000000)
+	body.setDamping(2)
 
 
 
 	def movementUp {
-		val newPosition = new Vector2f(body.getPosition)
-		newPosition.add(new Vector2f(0, -Paddle.speed))
-		body.setPosition(newPosition.x, newPosition.y)
+		body.setForce(0, -Paddle.speed)
 	}
 
 
 
 	def movementDown {
-		val newPosition = new Vector2f(body.getPosition)
-		newPosition.add(new Vector2f(0, Paddle.speed))
-		body.setPosition(newPosition.x, newPosition.y)
+		body.setForce(0, Paddle.speed)
+	}
+
+
+
+	def movementStop {
+		body.setForce(0, 0)
 	}
 }
 
@@ -51,5 +55,5 @@ class Paddle(initialX: Float, initialY: Float) {
 
 object Paddle {
 	val radius = 50
-	val speed = 5
+	val speed = 100000
 }

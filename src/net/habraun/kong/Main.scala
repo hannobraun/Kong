@@ -101,6 +101,9 @@ object Main {
 				else if (inputHandler.isDownPressed(i)) {
 					paddles(i).movementDown
 				}
+				else {
+					paddles(i).movementStop
+				}
 			}
 
 			world.step
