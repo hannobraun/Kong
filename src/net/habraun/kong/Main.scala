@@ -64,10 +64,27 @@ object Main {
 		val inputHandler = new InputHandler
 		canvas.getRoot.getDefaultInputManager.setKeyboardFocus(inputHandler)
 
+		// Initialize paddles
+		val paddle1 = new Paddle
+		val paddle2 = new Paddle
+		val paddles = paddle1::paddle2::Nil
+
 		frame.setVisible(true)
 
 		while (true) {
-			Console.println(inputHandler.isUpPressed(0))
+			// Process input
+			for (i <- 0 until paddles.length) {
+				if (inputHandler.isUpPressed(i)) {
+					paddles(i).movementUp
+				}
+				else if (inputHandler.isDownPressed(i)) {
+					paddles(i).movementDown
+				}
+				else {
+					paddles(i).movementStop
+				}
+			}
+
 			Thread.sleep(50)
 		}
 	}
