@@ -116,6 +116,7 @@ object Main {
 		world.add(bottomBorder)
 
 		frame.setVisible(true)
+		canvas.requestFocusInWindow
 
 		while (true) {
 			// Process input
