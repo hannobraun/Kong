@@ -109,15 +109,37 @@ object Main {
 		bottomBorder.setRestitution(1)
 
 		// Initialize world for physics simulation and add all bodies
-		val world = new World(new Vector2f(0, 0), 10)
+		val world = new World(new Vector2f(0, 0), 1000)
 		paddles.foreach((paddle) => world.add(paddle.body))
 		world.add(ball.body)
 		world.add(topBorder)
 		world.add(bottomBorder)
 
+		// Initialize score counter
+		val scorePaint = Color.BLACK
+		val score = new PText(":")
+		val scoreNode1 = new PText("0")
+		val scoreNode2 = new PText("0")
+		score.addChild(scoreNode1)
+		score.addChild(scoreNode2)
+		score.setTextPaint(scorePaint)
+		scoreNode1.setTextPaint(scorePaint)
+		scoreNode2.setTextPaint(scorePaint)
+		score.setTransparency(0.2f)
+		score.setScale(15)
+		score.setOffset(screenSizeX / 2 - (score.getWidth * score.getScale / 2),
+				screenSizeY / 2 - (score.getHeight * score.getScale / 2))
+		scoreNode1.setOffset(-scoreNode1.getWidth, 0)
+		scoreNode2.setOffset(3.5, 0)
+		canvas.getLayer.addChild(score)
+		
 		frame.setVisible(true)
 		canvas.requestFocusInWindow
 
+		var score1 = 0
+		var score2 = 0
+
+		// Game loop
 		while (true) {
 			// Process input
 			for (i <- 0 until paddles.length) {
@@ -138,9 +160,11 @@ object Main {
 			// Check if the ball left the field and needs to be placed in the middle again
 			val  ballX = ball.body.getPosition.getX
 			if (ballX > screenSizeX) {
+				score1 += 1
 				ball.init
 			}
 			if (ballX < 0) {
+				score2 += 1
 				ball.init
 			}
 
@@ -158,6 +182,9 @@ object Main {
 				val x = position.getX - Ball.radius
 				val y = position.getY - Ball.radius
 				ballNode.setTransform(AffineTransform.getTranslateInstance(x, y))
+
+				scoreNode1.setText(score1.toString)
+				scoreNode2.setText(score2.toString)
 			}})
 
 			Thread.sleep(17)
