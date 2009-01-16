@@ -65,6 +65,9 @@ class Score(centerX: Int, centerY: Int) {
 	def update {
 		scoreNode1.setText(score1.toString)
 		scoreNode2.setText(score2.toString)
+
+		scoreNode1.setOffset(-scoreNode1.getWidth, 0)
+		scoreNode2.setOffset(Score.border, 0)
 	}
 }
 
