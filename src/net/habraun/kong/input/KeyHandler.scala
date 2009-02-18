@@ -87,6 +87,17 @@ class KeyHandler(keyMap: KeyMap) extends PBasicInputEventHandler {
 
 
 	/**
+	 * Returns true if a given key is pressed.
+	 */
+
+	def isPressed(player: Player, key: Key): Boolean = {
+		val keyCode = keyMap.mappings(player)(key)
+		pressedKeys.contains(keyCode)
+	}
+
+
+
+	/**
 	 * Executes an action if a specific player has pressed a specific key.
 	 */
 
