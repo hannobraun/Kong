@@ -20,7 +20,10 @@ package net.habraun.kong
 
 
 
+import input._
+
 import java.awt._
+import java.awt.event._
 import java.awt.geom._
 import javax.swing._
 
@@ -67,12 +70,21 @@ object Main {
 		canvas.getLayer.addChild(middleLine)
 
 		// Configure the input handler
-		val inputHandler = new InputHandler
-		canvas.getRoot.getDefaultInputManager.setKeyboardFocus(inputHandler)
+		object PlayerLeft extends Player
+		object PlayerRight extends Player
+		object UpKey extends Key
+		object DownKey extends Key
+		val keyMap = (new KeyMap)
+				.addMapping(PlayerLeft, UpKey, KeyEvent.VK_W)
+				.addMapping(PlayerLeft, DownKey, KeyEvent.VK_S)
+				.addMapping(PlayerRight, UpKey, KeyEvent.VK_UP)
+				.addMapping(PlayerRight, DownKey, KeyEvent.VK_DOWN)
+		val keyHandler = new KeyHandler(keyMap)
+		canvas.getRoot.getDefaultInputManager.setKeyboardFocus(keyHandler)
 
 		// Initialize paddles
-		val paddle1 = new Paddle(border + Paddle.radius, screenSizeY / 2)
-		val paddle2 = new Paddle(screenSizeX - border - Paddle.radius, screenSizeY / 2)
+		val paddle1 = new Paddle(PlayerLeft, border + Paddle.radius, screenSizeY / 2)
+		val paddle2 = new Paddle(PlayerRight, screenSizeX - border - Paddle.radius, screenSizeY / 2)
 		val paddles = paddle1::paddle2::Nil
 
 		// Initialize scene graph nodes for paddles
@@ -126,15 +138,9 @@ object Main {
 		while (true) {
 			// Process input
 			for (i <- 0 until paddles.length) {
-				if (inputHandler.isUpPressed(i)) {
-					paddles(i).movementUp
-				}
-				else if (inputHandler.isDownPressed(i)) {
-					paddles(i).movementDown
-				}
-				else {
-					paddles(i).movementStop
-				}
+				keyHandler.doIfOrElse((paddles(i).getPlayer, UpKey, () => paddles(i).movementUp)::
+						(paddles(i).getPlayer, DownKey, () => paddles(i).movementDown)::Nil,
+						() => paddles(i).movementStop)
 			}
 
 			// Step the physics simulation

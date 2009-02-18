@@ -19,13 +19,16 @@
 package net.habraun.kong
 
 
+
+import input._
+
 import net.phys2d.math._
 import net.phys2d.raw._
 import net.phys2d.raw.shapes._
 
 
 
-class Paddle(initialX: Float, initialY: Float) {
+class Paddle(player: Player, initialX: Float, initialY: Float) {
 
 	val body = new Body(new Circle(Paddle.radius), 100)
 	body.setPosition(initialX, initialY)
@@ -33,6 +36,10 @@ class Paddle(initialX: Float, initialY: Float) {
 	body.setDamping(10)
 	body.setRestitution(1)
 	body.setRotatable(false)
+
+
+
+	def getPlayer = player
 
 
 
