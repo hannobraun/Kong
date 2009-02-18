@@ -60,7 +60,7 @@ import edu.umd.cs.piccolo.event._
  * }
  */
 
-class InputHandler(keyMap: KeyMap) extends PBasicInputEventHandler {
+class KeyHandler(keyMap: KeyMap) extends PBasicInputEventHandler {
 
 	val pressedKeys = new HashSet[Int]
 
