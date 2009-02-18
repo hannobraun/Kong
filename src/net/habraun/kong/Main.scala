@@ -138,9 +138,12 @@ object Main {
 		while (true) {
 			// Process input
 			for (i <- 0 until paddles.length) {
-				keyHandler.doIfOrElse((paddles(i).getPlayer, UpKey, () => paddles(i).movementUp)::
-						(paddles(i).getPlayer, DownKey, () => paddles(i).movementDown)::Nil,
-						() => paddles(i).movementStop)
+				if (keyHandler.isPressed(paddles(i).getPlayer, UpKey))
+					paddles(i).movementUp
+				else if (keyHandler.isPressed(paddles(i).getPlayer, DownKey))
+					paddles(i).movementDown
+				else
+					paddles(i).movementStop
 			}
 
 			// Step the physics simulation
