@@ -102,8 +102,7 @@ class KeyHandler(keyMap: KeyMap) extends PBasicInputEventHandler {
 	 */
 
 	def doIfPressed[R](player: Player, key: Key, action: () => R): Option[R] = {
-		val keyCode = keyMap.mappings(player)(key)
-		if (pressedKeys.contains(keyCode))
+		if (isPressed(player, key))
 			Some(action())
 		else
 			None
