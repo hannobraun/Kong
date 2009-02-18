@@ -71,4 +71,31 @@ class KeyHandlerTest {
 		keyHandler.keyReleased(testEvent)
 		assertFalse(keyHandler.isPressed(TestPlayer, TestKey))
 	}
+
+
+
+	@Test
+	def doNothingCheckDoIfPressed {
+		val result = keyHandler.doIfPressed(TestPlayer, TestKey, () => 5)
+		assertEquals(None, result)
+	}
+
+
+
+	@Test
+	def pressKeyCheckDoIfPressed {
+		keyHandler.keyPressed(testEvent)
+		val result = keyHandler.doIfPressed(TestPlayer, TestKey, () => 5)
+		assertEquals(Some(5), result)
+	}
+
+
+
+	@Test
+	def pressAndreleaseKeyCheckDoIfPressed {
+		keyHandler.keyPressed(testEvent)
+		keyHandler.keyReleased(testEvent)
+		val result = keyHandler.doIfPressed(TestPlayer, TestKey, () => 5)
+		assertEquals(None, result)
+	}
 }
