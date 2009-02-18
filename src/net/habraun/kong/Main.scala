@@ -137,14 +137,14 @@ object Main {
 		// Game loop
 		while (true) {
 			// Process input
-			for (i <- 0 until paddles.length) {
-				if (keyHandler.isPressed(paddles(i).getPlayer, UpKey))
-					paddles(i).movementUp
-				else if (keyHandler.isPressed(paddles(i).getPlayer, DownKey))
-					paddles(i).movementDown
+			paddles.foreach((paddle) => {
+				if (keyHandler.isPressed(paddle.getPlayer, UpKey))
+					paddle.movementUp
+				else if (keyHandler.isPressed(paddle.getPlayer, DownKey))
+					paddle.movementDown
 				else
-					paddles(i).movementStop
-			}
+					paddle.movementStop
+			})
 
 			// Step the physics simulation
 			world.step
