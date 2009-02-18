@@ -108,31 +108,4 @@ class KeyHandler(keyMap: KeyMap) extends PBasicInputEventHandler {
 		else
 			None
 	}
-
-
-
-	/**
-	 * Executes all conditional actions whose conditions are satisfied. Executes elseAction if no conditional
-	 * actions were executed.
-	 */
-
-	def doIfOrElse(conditionalActions: List[(Player, Key, () => Unit)], elseAction: () => Unit) {
-		val executedActions = conditionalActions.filter((cond) => {
-			val player = cond._1
-			val key = cond._2
-			val action = cond._3
-
-			val keyCode = keyMap.mappings(player)(key)
-			if (pressedKeys.contains(keyCode)) {
-				action()
-				true
-			}
-			else
-				false
-		})
-
-		if (executedActions.length == 0) {
-			elseAction()
-		}
-	}
 }
