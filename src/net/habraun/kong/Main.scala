@@ -80,7 +80,7 @@ object Main {
 				.addMapping(PlayerRight, UpKey, KeyEvent.VK_UP)
 				.addMapping(PlayerRight, DownKey, KeyEvent.VK_DOWN)
 		val keyHandler = new KeyHandler(keyMap)
-		canvas.getRoot.getDefaultInputManager.setKeyboardFocus(keyHandler)
+		canvas.getRoot.getDefaultInputManager.setKeyboardFocus(keyHandler.handler)
 
 		// Initialize paddles
 		val paddle1 = new Paddle(PlayerLeft, border + Paddle.radius, screenSizeY / 2)

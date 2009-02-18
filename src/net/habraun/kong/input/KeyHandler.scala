@@ -60,39 +60,34 @@ import edu.umd.cs.piccolo.event._
  * }
  */
 
-class KeyHandler(keyMap: KeyMap) extends PBasicInputEventHandler {
+class KeyHandler(keyMap: KeyMap) {
 
-	val pressedKeys = new HashSet[Int]
+	val handler = new PBasicInputEventHandler {
+
+		val pressedKeys = new HashSet[Int]
 
 
 
-	/**
-	 * Don't call this. This method is called by Piccolo when a key is pressed.
-	 */
+		override def keyPressed(event: PInputEvent) {
+			pressedKeys.addEntry(event.getKeyCode)
+		}
 
-	override def keyPressed(event: PInputEvent) {
-		pressedKeys.addEntry(event.getKeyCode)
+
+
+		override def keyReleased(event: PInputEvent) {
+			pressedKeys.removeEntry(event.getKeyCode)
+		}
 	}
 
 
-
-	/**
-	 * Don't call this. This method is called by Piccolo when a key is released.
-	 */
-
-	override def keyReleased(event: PInputEvent) {
-		pressedKeys.removeEntry(event.getKeyCode)
-	}
-
-
-
+	
 	/**
 	 * Returns true if a given key is pressed.
 	 */
 
 	def isPressed(player: Player, key: Key): Boolean = {
 		val keyCode = keyMap.mappings(player)(key)
-		pressedKeys.contains(keyCode)
+		handler.pressedKeys.contains(keyCode)
 	}
 
 
