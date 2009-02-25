@@ -170,6 +170,16 @@ class BodyTest {
 
 
 
+	@Test
+	def applyForceResetForce {
+		val body = new Body
+		body.applyForce(Vec2D(10, 10))
+		body.resetForce
+		assertEquals(Vec2D(0, 0), body.appliedForce)
+	}
+
+
+
 	@Test { val expected = classOf[NullPointerException] }
 	def applyNullForceExpectException {
 		val body = new Body
