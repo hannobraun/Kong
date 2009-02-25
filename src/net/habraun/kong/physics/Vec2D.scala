@@ -45,6 +45,14 @@ case class Vec2D(x: Double, y: Double) {
 
 
 	/**
+	 * Divides the vector with a scalar.
+	 */
+
+	def / (scalar: Double) = Vec2D(x / scalar, y / scalar)
+
+
+
+	/**
 	 * Computes the dot product of this vector and another vector.
 	 */
 

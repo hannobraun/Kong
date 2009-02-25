@@ -45,6 +45,14 @@ class Vec2DTest {
 
 
 	@Test
+	def scalarDivision {
+		val vec = Vec2D(2, 2)
+		assertEquals(Vec2D(1, 1), vec / 2.0)
+	}
+
+
+
+	@Test
 	def dotProduct {
 		val vec1 = Vec2D(1, 2)
 		val vec2 = Vec2D(2, 1)
