@@ -211,4 +211,38 @@ class BodyTest {
 		val body = new Body
 		body.shape = null
 	}
+
+
+
+	@Test
+	def verifyXMovementInitiallyAllowed {
+		val body = new Body
+		assertTrue(body.xMovementAllowed)
+	}
+
+
+
+	@Test
+	def verifyYMovementInitiallyAllowed {
+		val body = new Body
+		assertTrue(body.yMovementAllowed)
+	}
+
+
+
+	@Test
+	def disallowXMovement {
+		val body = new Body
+		body.allowXMovement(false)
+		assertFalse(body.xMovementAllowed)
+	}
+
+
+
+	@Test
+	def dissalowYMovement {
+		val body = new Body
+		body.allowYMovement(false)
+		assertFalse(body.yMovementAllowed)
+	}
 }

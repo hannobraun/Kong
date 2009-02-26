@@ -144,4 +144,22 @@ class Body {
 		if (mv < 0) throw new IllegalArgumentException
 		_maxVelocity = mv
 	}
+
+
+
+	/**
+	 * The movement of an object can be constrained. Currently it is only possible to disallow movement along
+	 * the x and y axes.
+	 */
+
+	private[this] var _xMovementAllowed = true
+	private[this] var _yMovementAllowed = true
+
+	def xMovementAllowed = _xMovementAllowed
+
+	def yMovementAllowed = _yMovementAllowed
+
+	def allowXMovement(allowed: Boolean) = _xMovementAllowed = allowed
+
+	def allowYMovement(allowed: Boolean) = _yMovementAllowed = allowed
 }

@@ -76,4 +76,30 @@ class WorldTest {
 		world.step(2.0)
 		assertEquals(Vec2D(2, 0), body.velocity)
 	}
+
+
+
+	@Test
+	def addBodyDisallowXMovementStepCheckPosition {
+		val world = new World
+		val body = new Body
+		body.allowXMovement(false)
+		body.applyForce(Vec2D(1, 1))
+		world.add(body)
+		world.step(2.0)
+		assertEquals(Vec2D(0, 4), body.position)
+	}
+
+
+
+	@Test
+	def addBodyDisallowYMovementStepCheckPosition {
+		val world = new World
+		val body = new Body
+		body.allowYMovement(false)
+		body.applyForce(Vec2D(1, 1))
+		world.add(body)
+		world.step(2.0)
+		assertEquals(Vec2D(4, 0), body.position)
+	}
 }

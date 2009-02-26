@@ -67,7 +67,10 @@ class World {
 			body.resetForce
 
 			// Move bodies.
-			body.position = body.position + (body.velocity * delta)
+			val constrainedXVelocity = if (body.xMovementAllowed) body.velocity.x else 0.0
+			val constrainedYVelocity = if (body.yMovementAllowed) body.velocity.y else 0.0
+			val constrainedVelocity = Vec2D(constrainedXVelocity, constrainedYVelocity)
+			body.position = body.position + (constrainedVelocity * delta)
 		})
 	}
 }
