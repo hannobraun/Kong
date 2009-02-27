@@ -33,8 +33,35 @@ class World {
 
 	private[this] var bodies = new HashSet[Body]
 
-	var broadPhase: BroadPhase = new SimpleBroadPhase
-	var narrowPhase: NarrowPhase = NoNarrowPhase
+	/**
+	 * The broad phase is used for detecting which bodys can possible collide.
+	 * This is done to cut down the time spent on doing detailed collision checks.
+	 */
+
+	private[this] var _broadPhase: BroadPhase = new SimpleBroadPhase
+
+	def broadPhase = _broadPhase
+
+	def broadPhase_=(bp: BroadPhase) = {
+		if (bp == null) throw new NullPointerException
+		_broadPhase = bp
+	}
+
+
+
+	/**
+	 * The narrow phase is used to perform detailed (and possibly expensive) collision testing on body pairs
+	 * that made it through the broad phase.
+	 */
+
+	private[this] var _narrowPhase: NarrowPhase = NoNarrowPhase
+
+	def narrowPhase = _narrowPhase
+
+	def narrowPhase_=(np: NarrowPhase) = {
+		if (np == null) throw new NullPointerException
+		_narrowPhase = np
+	}
 
 
 

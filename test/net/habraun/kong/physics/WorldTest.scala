@@ -131,4 +131,20 @@ class WorldTest {
 		val world = new World
 		assertEquals(NoNarrowPhase, world.narrowPhase)
 	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def setBroadPhaseNullExpectException {
+		val world = new World
+		world.broadPhase = null
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def setNarrowPhaseNullExpectException {
+		val world = new World
+		world.narrowPhase = null
+	}
 }
