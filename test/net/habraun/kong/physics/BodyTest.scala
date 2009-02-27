@@ -141,6 +141,14 @@ class BodyTest {
 
 
 
+	@Test { val expected = classOf[IllegalArgumentException] }
+	def setMassZeroExpectException {
+		val body = new Body
+		body.mass = 0.0
+	}
+
+
+
 	@Test
 	def checkInitialAppliedForce {
 		val body = new Body

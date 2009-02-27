@@ -93,8 +93,9 @@ class Body {
 
 	/**
 	 * The body's mass, measured in kilograms.
-	 * After creation, a body has an initial mass of 1. The mass must never be negative.
-	 * A mass of 0 indicates that a body is static. Static bodies don't move. Forces have no effect on them.
+	 * After creation, a body has an initial mass of 1. The mass must never be negative or zero.
+	 * A mass of Double.PositiveInfinity indicates that a body is static. Static bodies don't move. Forces
+	 * have no effect on them.
 	 */
 	
 	private[this] var _mass = 1.0
@@ -102,7 +103,7 @@ class Body {
 	def mass = _mass
 
 	def mass_=(m: Double) {
-		if (m < 0) throw new IllegalArgumentException
+		if (m <= 0) throw new IllegalArgumentException
 		_mass = m
 	}
 
