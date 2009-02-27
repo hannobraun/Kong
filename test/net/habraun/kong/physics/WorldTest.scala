@@ -119,7 +119,7 @@ class WorldTest {
 
 
 	@Test
-	def createWorldVerifyInitialCollisionSolver {
+	def createWorldVerifyInitialNarrowPhase {
 		val world = new World
 		assertEquals(NoNarrowPhase, world.narrowPhase)
 	}
