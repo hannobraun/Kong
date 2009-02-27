@@ -37,6 +37,14 @@ case class Vec2D(x: Double, y: Double) {
 
 
 	/**
+	 * Substracts another vector.
+	 */
+
+	def - (vector: Vec2D) = Vec2D(x - vector.x, y - vector.y)
+
+
+
+	/**
 	 * Multiplies the vector with a scalar.
 	 */
 

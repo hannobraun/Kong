@@ -37,6 +37,15 @@ class Vec2DTest {
 
 
 	@Test
+	def substraction {
+		val vec1 = Vec2D(5, 5)
+		val vec2 = Vec2D(4, 4)
+		assertEquals(Vec2D(1, 1), vec1 - vec2)
+	}
+
+
+
+	@Test
 	def scalarMultiplication {
 		val vec = Vec2D(1, 1)
 		assertEquals(Vec2D(2, 2), vec * 2)
