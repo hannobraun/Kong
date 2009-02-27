@@ -119,6 +119,14 @@ class WorldTest {
 
 
 	@Test
+	def createWorldVerifyInitialBroadPhase {
+		val world = new World
+		assertTrue(world.broadPhase.isInstanceOf[SimpleBroadPhase])
+	}
+
+
+
+	@Test
 	def createWorldVerifyInitialNarrowPhase {
 		val world = new World
 		assertEquals(NoNarrowPhase, world.narrowPhase)

@@ -33,6 +33,7 @@ class World {
 
 	private[this] var bodies = new HashSet[Body]
 
+	var broadPhase: BroadPhase = new SimpleBroadPhase
 	var narrowPhase: NarrowPhase = NoNarrowPhase
 
 
