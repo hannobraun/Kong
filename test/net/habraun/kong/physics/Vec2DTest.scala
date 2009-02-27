@@ -58,4 +58,12 @@ class Vec2DTest {
 		val vec2 = Vec2D(2, 1)
 		assertEquals(4.0, vec1 * vec2, 0.0)
 	}
+
+
+
+	@Test
+	def inverse {
+		val vec = Vec2D(1, 1)
+		assertEquals(Vec2D(-1, -1), vec.inverse)
+	}
 }
