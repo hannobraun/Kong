@@ -192,4 +192,33 @@ class WorldTest {
 
 		assertEquals((b1, b2)::(b3, b4)::Nil, narrowPhase.passedPairs)
 	}
+	
+	
+	
+	@Test
+	def verifyCollisionEffects {
+		val world = new World
+
+		val b1 = new Body
+		b1.position = Vec2D(0, 1)
+		b1.mass = 5
+		b1.velocity = Vec2D(-10, -10)
+		val b2 = new Body
+		b2.position = Vec2D(0, -1)
+		b2.mass = 10
+		b2.velocity = Vec2D(5, 5)
+
+		world.narrowPhase = new NarrowPhase {
+			def inspectCollision(b1: Body, b2: Body) = {
+				Some(Collision(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0)))
+			}
+		}
+
+		world.add(b1)
+		world.add(b2)
+		world.step(2.0)
+
+		assertEquals(Vec2D(-10, 10), b1.velocity)
+		assertEquals(Vec2D(5, -5), b2.velocity)
+	}
 }
