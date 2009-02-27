@@ -115,4 +115,12 @@ class WorldTest {
 		world.step(2.0)
 		assertEquals(Vec2D(4, 0), body.position)
 	}
+
+
+
+	@Test
+	def createWorldVerifyInitialCollisionSolver {
+		val world = new World
+		assertEquals(NoCollisionSolver, world.collisionSolver)
+	}
 }
