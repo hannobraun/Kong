@@ -147,4 +147,49 @@ class WorldTest {
 		val world = new World
 		world.narrowPhase = null
 	}
+
+
+
+	@Test
+	def addBodyVerifyItIsPassedToBroadPhase {
+		val world = new World
+
+		val broadPhase = new BroadPhase {
+			var passedBodies: List[Body] = null
+			def detectPossibleCollisions(bodies: List[Body]) = { passedBodies = bodies; Nil }
+		}
+		world.broadPhase = broadPhase
+
+		val body = new Body
+		world.add(body)
+		world.step(2.0)
+
+		assertEquals(body::Nil, broadPhase.passedBodies)
+	}
+
+
+
+	@Test
+	def addBroadPhaseReturningBodyPairsVerifyTheyArePassedToNarrowPhase {
+		val world = new World
+
+		val b1 = new Body
+		val b2 = new Body
+		val b3 = new Body
+		val b4 = new Body
+
+		world.broadPhase = new BroadPhase {
+			def detectPossibleCollisions(bodies: List[Body]) = (b1, b2)::(b3, b4)::Nil
+		}
+
+		val narrowPhase = new NarrowPhase {
+			var passedPairs: List[(Body, Body)] = Nil
+			def inspectCollision(b1: Body, b2: Body) = { passedPairs = passedPairs + (b1, b2); None }
+		}
+		world.narrowPhase = narrowPhase
+
+		world.step(2.0)
+
+		assertEquals((b1, b2)::(b3, b4)::Nil, narrowPhase.passedPairs)
+	}
 }

@@ -91,6 +91,10 @@ class World {
 	 */
 	
 	def step(delta: Double) {
+		// Collision detection
+		val collisionPairs = broadPhase.detectPossibleCollisions(bodies.toList)
+		collisionPairs.foreach((pair) => narrowPhase.inspectCollision(pair._1, pair._2))
+		
 		bodies.foreach((body) => {
 			// Apply forces.
 			body.velocity = body.velocity + body.appliedForce / body.mass * delta
