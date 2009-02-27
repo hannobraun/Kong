@@ -20,7 +20,25 @@ package net.habraun.kong.physics
 
 
 
-trait CollisionSolver {
+import org.junit._
+import org.junit.Assert._
 
-	def solveCollision(b1: Body, b2: Body): Option[Collision]
+
+
+class NoCollisionSolverTest {
+
+	@Test
+	def verifyIsCollisionSolver {
+		assertTrue(NoNarrowPhase.isInstanceOf[NarrowPhase])
+	}
+
+
+
+	@Test
+	def verifyCollisionIsNone {
+		val b1 = new Body
+		val b2 = new Body
+		val collision = NoNarrowPhase.inspectCollision(b1, b2)
+		assertEquals(None, collision)
+	}
 }

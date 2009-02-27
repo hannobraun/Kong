@@ -20,7 +20,7 @@ package net.habraun.kong.physics
 
 
 
-object NoCollisionSolver extends CollisionSolver {
+trait NarrowPhase {
 
-	def solveCollision(b1: Body, b2: Body): Option[Collision] = None
+	def inspectCollision(b1: Body, b2: Body): Option[Collision]
 }

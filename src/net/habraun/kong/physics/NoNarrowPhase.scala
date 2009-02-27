@@ -20,25 +20,7 @@ package net.habraun.kong.physics
 
 
 
-import org.junit._
-import org.junit.Assert._
+object NoNarrowPhase extends NarrowPhase {
 
-
-
-class NoCollisionSolverTest {
-
-	@Test
-	def verifyIsCollisionSolver {
-		assertTrue(NoCollisionSolver.isInstanceOf[CollisionSolver])
-	}
-
-
-
-	@Test
-	def verifyCollisionIsNone {
-		val b1 = new Body
-		val b2 = new Body
-		val collision = NoCollisionSolver.solveCollision(b1, b2)
-		assertEquals(None, collision)
-	}
+	def inspectCollision(b1: Body, b2: Body): Option[Collision] = None
 }

@@ -121,6 +121,6 @@ class WorldTest {
 	@Test
 	def createWorldVerifyInitialCollisionSolver {
 		val world = new World
-		assertEquals(NoCollisionSolver, world.collisionSolver)
+		assertEquals(NoNarrowPhase, world.narrowPhase)
 	}
 }

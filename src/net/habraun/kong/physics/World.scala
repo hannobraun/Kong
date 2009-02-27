@@ -33,7 +33,7 @@ class World {
 
 	private[this] var bodies = new HashSet[Body]
 
-	var collisionSolver: CollisionSolver = NoCollisionSolver
+	var narrowPhase: NarrowPhase = NoNarrowPhase
 
 
 
