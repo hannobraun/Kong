@@ -31,8 +31,8 @@ class CollisionTest {
 	def verifyHasAttributes {
 		val b1 = new Body
 		val b2 = new Body
-		val normal1 = Vec2D(5, 5)
-		val normal2 = Vec2D(-5, -5)
+		val normal1 = Vec2D(0, 1)
+		val normal2 = Vec2D(0, -1)
 		val impactPoint = Vec2D(10, 10)
 		val collision = Collision(b1, b2, normal1, normal2, impactPoint)
 		assertEquals(b1, collision.b1)
@@ -45,7 +45,14 @@ class CollisionTest {
 
 
 	@Test { val expected = classOf[IllegalArgumentException] }
-	def createCollisionWithInvalidNormalsExpectException {
-		Collision(new Body, new Body, Vec2D(5, 5), Vec2D(-4, -4), Vec2D(0, 0))
+	def createCollisionWithNonInverseNormalsExpectException {
+		Collision(new Body, new Body, Vec2D(1, 0), Vec2D(0, -1), Vec2D(0, 0))
+	}
+
+
+
+	@Test { val expected = classOf[IllegalArgumentException] }
+	def createCollisionWithNonUnitNormalsExpectException {
+		Collision(new Body, new Body, Vec2D(1, 1), Vec2D(-1, -1), Vec2D(0, 0))
 	}
 }
