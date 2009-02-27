@@ -33,6 +33,8 @@ class World {
 
 	private[this] var bodies = new HashSet[Body]
 
+	
+
 	/**
 	 * The broad phase is used for detecting which bodys can possible collide.
 	 * This is done to cut down the time spent on doing detailed collision checks.
