@@ -20,7 +20,17 @@ package net.habraun.kong.physics
 
 
 
+/**
+ * SimpleBroadPhase is the simplest possible implementation of a broad phase. It just builds all possible
+ * pairs of the bodies it is given and returns those.
+ * If any other broad phase implementation is available, it should probably be used in place of this one.
+ */
+
 class SimpleBroadPhase extends BroadPhase {
+
+	/**
+	 * Builds and returns all possible pairs of the given bodies.
+	 */
 
 	def detectPossibleCollisions(bodies: List[Body]) = {
 		def buildPairs(list: List[Body], pairs: List[(Body, Body)]): List[(Body, Body)] = {
