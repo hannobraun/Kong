@@ -31,7 +31,7 @@ import scala.collection.mutable._
 
 class World {
 
-	private[this] var bodies = new HashSet[Body]
+	private[this] val bodies = new HashSet[Body]
 
 	
 
