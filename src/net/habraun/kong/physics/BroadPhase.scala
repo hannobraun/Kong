@@ -20,7 +20,19 @@ package net.habraun.kong.physics
 
 
 
+/**
+ * The broad phase is the first of two phases of collision detection.
+ * It is responsible for doing a rough and cheap test, determining what bodies _could_ collide, thus reducing
+ * the number of body pairs the second phase (narrow phase) has to test.
+ */
+
 trait BroadPhase {
+
+	/**
+	 * Determines which of the given bodies could potentially collide.
+	 * Returns a list of body pairs that should be further tested by the narrow phase. The list of body pairs
+	 * must not contain duplicates.
+	 */
 
 	def detectPossibleCollisions(bodies: List[Body]): List[(Body, Body)]
 }
