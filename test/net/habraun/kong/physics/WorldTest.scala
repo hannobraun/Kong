@@ -221,4 +221,54 @@ class WorldTest {
 		assertEquals(Vec2D(-10, 10), b1.velocity)
 		assertEquals(Vec2D(5, -5), b2.velocity)
 	}
+
+
+
+	@Test
+	def verifyCollisionEffectsWithBody1Static {
+		val world = new World
+
+		val b1 = new Body
+		b1.mass = Double.PositiveInfinity
+		val b2 = new Body
+		b2.velocity = Vec2D(1, 1)
+
+		world.narrowPhase = new NarrowPhase {
+			def inspectCollision(b1: Body, b2: Body) = {
+				Some(Collision(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0)))
+			}
+		}
+
+		world.add(b1)
+		world.add(b2)
+		world.step(2.0)
+
+		assertEquals(Vec2D(0, 0), b1.velocity)
+		assertEquals(Vec2D(1, -1), b2.velocity)
+	}
+
+
+
+	@Test
+	def verifyCollisionEffectsWithBody2Static {
+		val world = new World
+
+		val b1 = new Body
+		b1.velocity = Vec2D(1, 1)
+		val b2 = new Body
+		b2.mass = Double.PositiveInfinity
+
+		world.narrowPhase = new NarrowPhase {
+			def inspectCollision(b1: Body, b2: Body) = {
+				Some(Collision(b1, b2, Vec2D(0, 1), Vec2D(0, -1), Vec2D(0, 0)))
+			}
+		}
+
+		world.add(b1)
+		world.add(b2)
+		world.step(2.0)
+
+		assertEquals(Vec2D(1, -1), b1.velocity)
+		assertEquals(Vec2D(0, 0), b2.velocity)
+	}
 }

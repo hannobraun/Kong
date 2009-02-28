@@ -122,8 +122,22 @@ class World {
 			val v2 = b2ParallelVelocity
 			val m1 = collision.b1.mass
 			val m2 = collision.b2.mass
-			val b1ChangedVelocity = (v1 * (m1 - m2) + (v2 * m2 * 2)) / (m1 + m2)
-			val b2ChangedVelocity = (v2 * (m2 - m1) + (v1 * m1 * 2)) / (m1 + m2)
+			val b1ChangedVelocity = {
+				if (m1 == Double.PositiveInfinity)
+					v1
+				else if (m2 == Double.PositiveInfinity)
+					v1.inverse + (v2 * 2)
+				else
+					(v1 * (m1 - m2) + (v2 * m2 * 2)) / (m1 + m2)
+			}
+			val b2ChangedVelocity = {
+				if (m2 == Double.PositiveInfinity)
+					v2
+				else if (m1 == Double.PositiveInfinity)
+					v2.inverse + (v1 * 2)
+				else
+					(v2 * (m2 - m1) + (v1 * m1 * 2)) / (m1 + m2)
+			}
 
 			// The part of the velocity that is orthogonal to the normal remains unchanged. To get the new
 			// velocity we have to add the orthogonal, unchanged part to the parallel, changed part.
