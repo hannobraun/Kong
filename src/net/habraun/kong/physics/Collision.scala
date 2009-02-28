@@ -20,6 +20,17 @@ package net.habraun.kong.physics
 
 
 
+/**
+ * Models a collision between two bodies.
+ * A collision has the following attributes:
+ * * b1 and b2 are the two bodies that collide.
+ * * normal1 is the collision normal for b1. This is the unit vector, that is a surface normal for b1 at the
+ *   point of impact (pointing away from b1, towards b2). normal2 is the collision normal for b2 and is
+ *   always the inverse of normal1.
+ * * impactPoint is a position vector pointing at the point of impact. Determining the point of impact is not
+ *   yet implemented and impactPoint is always Vec2D(0, 0).
+ */
+
 case class Collision(b1: Body, b2: Body, normal1: Vec2D, normal2: Vec2D, impactPoint: Vec2D) {
 	if (normal1 != normal2.inverse)
 		throw new IllegalArgumentException("Both collision normals must be inverse to each other.")
