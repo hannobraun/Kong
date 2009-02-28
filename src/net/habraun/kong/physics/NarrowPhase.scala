@@ -20,7 +20,19 @@ package net.habraun.kong.physics
 
 
 
+/**
+ * The narrow phase is the second of two phases of collision detection.
+ * It determines if two bodies collide, and if they do, the properties of that collision. This operation is
+ * potentially expensive, so the narrow phase only tests bodies that were deemed likely candidates for
+ * collision by the broad phase.
+ */
+
 trait NarrowPhase {
+
+	/**
+	 * Determines if the two bodies collides, and if they do, returns a Collision object that describes the
+	 * collision. If the bodies do not collide, this method returns None.
+	 */
 
 	def inspectCollision(b1: Body, b2: Body): Option[Collision]
 }
