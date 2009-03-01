@@ -97,6 +97,14 @@ case class Vec2D(x: Double, y: Double) {
 
 
 
+	/**
+	 * Returns the unit vector with the same direction as this vector.
+	 */
+
+	def normalize = this / this.length
+
+
+
 
 	/**
 	 * Splits the vector into two parts, one of which is orthogonal to the given vector, the other being

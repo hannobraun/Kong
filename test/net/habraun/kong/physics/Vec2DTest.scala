@@ -95,6 +95,14 @@ class Vec2DTest {
 
 
 	@Test
+	def normalize {
+		val vec = Vec2D(2, 0)
+		assertEquals(Vec2D(1, 0), vec.normalize)
+	}
+
+
+
+	@Test
 	def splitCheckOrthogonalPart {
 		val vec1 = Vec2D(5, 5)
 		val vec2 = Vec2D(1, 0)
