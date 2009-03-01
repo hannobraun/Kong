@@ -79,6 +79,22 @@ class Vec2DTest {
 
 
 	@Test
+	def length {
+		val vec = Vec2D(2, 0)
+		assertEquals(2.0, vec.length, 0.0)
+	}
+
+
+
+	@Test
+	def squaredLength {
+		val vec = Vec2D(2, 2)
+		assertEquals(8.0, vec.squaredLength, 0.0)
+	}
+
+
+
+	@Test
 	def splitCheckOrthogonalPart {
 		val vec1 = Vec2D(5, 5)
 		val vec2 = Vec2D(1, 0)

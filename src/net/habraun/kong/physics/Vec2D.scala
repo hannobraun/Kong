@@ -78,6 +78,27 @@ case class Vec2D(x: Double, y: Double) {
 
 
 	/**
+	 * Returns the length of the vector.
+	 * Computing the length of the vector is much more expensive than computing its squared length. If
+	 * performance is critical, it is recommended to use squaredLength where applicable.
+	 */
+
+	def length = Math.sqrt((x * x) + (y * y))
+
+
+
+	/**
+	 * Returns the squared length of the vector.
+	 * If performance is critical, it is recommended to use this method over the length method where
+	 * applicable, as it is much cheaper.
+	 */
+
+	def squaredLength = (x * x) + (y * y)
+
+
+
+
+	/**
 	 * Splits the vector into two parts, one of which is orthogonal to the given vector, the other being
 	 * parallel. Both part vector added together result in the original vector.
 	 * This method returns a pair of vectors, the orthogonal vector being the first, the parallel one being
