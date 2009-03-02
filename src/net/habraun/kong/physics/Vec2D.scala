@@ -73,7 +73,9 @@ case class Vec2D(x: Double, y: Double) {
 	 * The inverse vector is the vector with the same length and opposite direction.
 	 */
 
-	def inverse = Vec2D(x * -1, y * -1)
+	def unary_- = Vec2D(x * -1, y * -1)
+
+	def inverse = -this
 
 
 

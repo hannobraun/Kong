@@ -73,6 +73,14 @@ class Vec2DTest {
 	@Test
 	def inverse {
 		val vec = Vec2D(1, 1)
+		assertEquals(Vec2D(-1, -1), -vec)
+	}
+
+
+
+	@Test
+	def oldInverse {
+		val vec = Vec2D(1, 1)
 		assertEquals(Vec2D(-1, -1), vec.inverse)
 	}
 
