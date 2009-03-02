@@ -35,5 +35,6 @@ case class Collision(b1: Body, b2: Body, normal1: Vec2D, normal2: Vec2D, impactP
 	if (normal1 != -normal2)
 		throw new IllegalArgumentException("Both collision normals must be inverse to each other.")
 	if (normal1 * normal1 != 1)
-		throw new IllegalArgumentException("Normals must be unit vectors.")
+		throw new IllegalArgumentException("Normals must be unit vectors. Normal 1: " + normal1
+				+ ", Normal 2: " + normal2)
 }
