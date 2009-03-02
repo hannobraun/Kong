@@ -126,7 +126,7 @@ class World {
 				if (m1 == Double.PositiveInfinity)
 					v1
 				else if (m2 == Double.PositiveInfinity)
-					v1.inverse + (v2 * 2)
+					-v1 + (v2 * 2)
 				else
 					(v1 * (m1 - m2) + (v2 * m2 * 2)) / (m1 + m2)
 			}
@@ -134,7 +134,7 @@ class World {
 				if (m2 == Double.PositiveInfinity)
 					v2
 				else if (m1 == Double.PositiveInfinity)
-					v2.inverse + (v1 * 2)
+					-v2 + (v1 * 2)
 				else
 					(v2 * (m2 - m1) + (v1 * m1 * 2)) / (m1 + m2)
 			}

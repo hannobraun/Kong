@@ -72,7 +72,7 @@ class SimpleNarrowPhase extends NarrowPhase {
 				val v = lineSegment.p2 - lineSegment.p1
 				val t = -(((p.x - cp.x) * v.x) + ((p.y - cp.y) * v.y)) / ((d.x * v.x) + (d.y * v.y))
 				val normal1 = (p + (d * t)).normalize
-				val normal2 = normal1.inverse
+				val normal2 = -normal1
 					Some(Collision(b1, b2, normal1, normal2, Vec2D(0, 0)))
 			}
 			else {
