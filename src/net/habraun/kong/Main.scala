@@ -21,6 +21,7 @@ package net.habraun.kong
 
 
 import input._
+import physics._
 
 import java.awt._
 import java.awt.event._
@@ -29,13 +30,12 @@ import javax.swing._
 
 import edu.umd.cs.piccolo._
 import edu.umd.cs.piccolo.nodes._
-import net.phys2d.math._
-import net.phys2d.raw._
-import net.phys2d.raw.shapes._
 
 
 
 object Main {
+
+	val timeStep = 1.0 / 50.0
 
 	val screenSizeX = 800
 	val screenSizeY = 600
@@ -110,18 +110,18 @@ object Main {
 		canvas.getLayer.addChild(ballNode)
 
 		// Initialize the borders
-		val borderShape = new Line(screenSizeX, 0)
-		val topBorder = new StaticBody(borderShape)
-		val bottomBorder = new StaticBody(borderShape)
-		topBorder.setPosition(0, 0)
-		bottomBorder.setPosition(0, screenSizeY)
-		topBorder.setFriction(0)
-		bottomBorder.setFriction(0)
-		topBorder.setRestitution(1)
-		bottomBorder.setRestitution(1)
+		val borderShape = LineSegment(Vec2D(0, 0), Vec2D(screenSizeX, 0))
+		val topBorder = new Body
+		topBorder.mass = Double.PositiveInfinity
+		topBorder.shape = borderShape
+		val bottomBorder = new Body
+		bottomBorder.mass = Double.PositiveInfinity
+		bottomBorder.shape = borderShape
+		topBorder.position = Vec2D(0, 0)
+		bottomBorder.position = Vec2D(0, screenSizeY)
 
 		// Initialize world for physics simulation and add all bodies
-		val world = new World(new Vector2f(0, 0), 1000)
+		val world = new World
 		paddles.foreach((paddle) => world.add(paddle.body))
 		world.add(ball.body)
 		world.add(topBorder)
@@ -147,10 +147,10 @@ object Main {
 			})
 
 			// Step the physics simulation
-			world.step
+			world.step(1.0 / 50.0)
 
 			// Check if the ball left the field and needs to be placed in the middle again
-			val  ballX = ball.body.getPosition.getX
+			val  ballX = ball.body.position.x
 			if (ballX > screenSizeX) {
 				score.increaseScore1
 				ball.init
@@ -163,22 +163,22 @@ object Main {
 			// Display game state
 			SwingUtilities.invokeLater(new Runnable { def run {
 				for (i <- 0 until paddles.length) {
-					val position = paddles(i).body.getPosition
-					val x = position.getX - Paddle.radius
-					val y = position.getY - Paddle.radius
+					val position = paddles(i).body.position
+					val x = position.x - Paddle.radius
+					val y = position.y - Paddle.radius
 
 					paddleNodes(i).setTransform(AffineTransform.getTranslateInstance(x, y))
 				}
 
-				val position = ball.body.getPosition
-				val x = position.getX - Ball.radius
-				val y = position.getY - Ball.radius
+				val position = ball.body.position
+				val x = position.x - Ball.radius
+				val y = position.y - Ball.radius
 				ballNode.setTransform(AffineTransform.getTranslateInstance(x, y))
 
 				score.update
 			}})
 
-			Thread.sleep(17)
+			Thread.sleep((timeStep * 1000).toLong)
 		}
 	}
 		

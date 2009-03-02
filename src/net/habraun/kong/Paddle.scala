@@ -21,21 +21,18 @@ package net.habraun.kong
 
 
 import input._
-
-import net.phys2d.math._
-import net.phys2d.raw._
-import net.phys2d.raw.shapes._
+import physics._
 
 
 
 class Paddle(player: Player, initialX: Float, initialY: Float) {
 
-	val body = new Body(new Circle(Paddle.radius), 100)
-	body.setPosition(initialX, initialY)
-	body.setMaxVelocity(0, 1000000)
-	body.setDamping(10)
-	body.setRestitution(1)
-	body.setRotatable(false)
+	val body = new Body
+	body.mass = 100
+	body.shape = Circle(Paddle.radius)
+	body.position = Vec2D(initialX, initialY)
+	body.allowXMovement(false)
+	//body.setDamping(10)
 
 
 
@@ -44,19 +41,28 @@ class Paddle(player: Player, initialX: Float, initialY: Float) {
 
 
 	def movementUp {
-		body.setForce(0, -Paddle.speed)
+		setSpeed(-Paddle.speed)
 	}
 
 
 
 	def movementDown {
-		body.setForce(0, Paddle.speed)
+		setSpeed(Paddle.speed)
 	}
 
 
 
 	def movementStop {
-		body.setForce(0, 0)
+		setSpeed(0)
+	}
+
+
+
+	private[this] def setSpeed(nominalSpeed: Double) {
+		val speedDifference = Math.abs(nominalSpeed - body.velocity.y)
+		val undirectedForce = speedDifference / Main.timeStep * body.mass
+		val force = if (nominalSpeed > body.velocity.y) undirectedForce else -undirectedForce
+		body.applyForce(new Vec2D(0, force))
 	}
 }
 
@@ -64,5 +70,5 @@ class Paddle(player: Player, initialX: Float, initialY: Float) {
 
 object Paddle {
 	val radius = 30
-	val speed = 500000
+	val speed = 500
 }

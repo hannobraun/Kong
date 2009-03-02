@@ -20,11 +20,9 @@ package net.habraun.kong
 
 
 
-import java.util._
+import physics._
 
-import net.phys2d.math._
-import net.phys2d.raw._
-import net.phys2d.raw.shapes._
+import java.util._
 
 
 
@@ -32,12 +30,10 @@ class Ball(startingX: Int, startingY: Int) {
 	
 	private val r = new Random
 
-	val body = new Body(new Circle(Ball.radius), Ball.mass)
-	body.setDamping(0)
-	body.setFriction(0)
-	body.setRestitution(1)
-	body.setRotatable(false)
-	body.setMaxVelocity(400, 400)
+	val body = new Body
+	body.shape = Circle(Ball.radius)
+	body.mass = Ball.mass
+	body.maxVelocity = 500
 
 
 
@@ -50,9 +46,8 @@ class Ball(startingX: Int, startingY: Int) {
 		val xVel = xMod * vel(r, 100, 3)
 		val yVel = yMod * vel(r, 0, 2)
 
-		body.adjustVelocity(new Vector2f(body.getVelocity).negate)
-		body.adjustVelocity(new Vector2f(xVel, yVel))
-		body.setPosition(startingX, startingY)
+		body.velocity = Vec2D(xVel, yVel)
+		body.position = Vec2D(startingX, startingY)
 	}
 }
 
