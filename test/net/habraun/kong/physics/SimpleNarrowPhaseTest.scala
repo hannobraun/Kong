@@ -116,6 +116,22 @@ class SimpleNarrowPhaseTest {
 
 
 	@Test
+	def inspectLineSegmentAndCircleExpectNoCollision {
+		val narrowPhase = new SimpleNarrowPhase
+
+		val b1 = new Body
+		b1.position = Vec2D(0, 0)
+		b1.shape = Circle(1)
+		val b2 = new Body
+		b2.position = Vec2D(0, 2)
+		b2.shape = LineSegment(Vec2D(-1, 0), Vec2D(1, 0))
+
+		assertEquals(None, narrowPhase.inspectCollision(b2, b1))
+	}
+
+
+
+	@Test
 	def inspectCircleAndLineSegmentExpectCollision {
 		val narrowPhase = new SimpleNarrowPhase
 

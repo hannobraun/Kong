@@ -40,9 +40,15 @@ class SimpleNarrowPhase extends NarrowPhase {
 			circleLineSegment(b1, b2, b1.shape.asInstanceOf[Circle], b2.shape.asInstanceOf[LineSegment])
 		}
 		else if (b1.shape.isInstanceOf[LineSegment] && b2.shape.isInstanceOf[Circle]) {
-			val collision = circleLineSegment(b2, b1, b2.shape.asInstanceOf[Circle],
-					b1.shape.asInstanceOf[LineSegment]).getOrElse { throw new AssertionError }
-			Some(Collision(b1, b2, collision.normal2, collision.normal1, Vec2D(0, 0)))
+			val possibleCollision = circleLineSegment(b2, b1, b2.shape.asInstanceOf[Circle],
+					b1.shape.asInstanceOf[LineSegment])
+			if (possibleCollision.isDefined) {
+				val collision = possibleCollision.getOrElse { throw new AssertionError }
+				Some(Collision(b1, b2, collision.normal2, collision.normal1, Vec2D(0, 0)))
+			}
+			else {
+				possibleCollision
+			}
 		}
 		else {
 			None
