@@ -56,7 +56,7 @@ class World {
 	 * that made it through the broad phase.
 	 */
 
-	private[this] var _narrowPhase: NarrowPhase = NoNarrowPhase
+	private[this] var _narrowPhase: NarrowPhase = new SimpleNarrowPhase
 
 	def narrowPhase = _narrowPhase
 

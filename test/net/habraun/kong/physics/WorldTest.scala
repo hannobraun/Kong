@@ -129,7 +129,7 @@ class WorldTest {
 	@Test
 	def verifyInitialNarrowPhase {
 		val world = new World
-		assertEquals(NoNarrowPhase, world.narrowPhase)
+		assertTrue(world.narrowPhase.isInstanceOf[SimpleNarrowPhase])
 	}
 
 
