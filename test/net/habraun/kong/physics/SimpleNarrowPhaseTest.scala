@@ -84,6 +84,24 @@ class SimpleNarrowPhaseTest {
 
 
 	@Test
+	def inspectTwoCirclesExpectCollision2 {
+		val narrowPhase = new SimpleNarrowPhase
+
+		val b1 = new Body
+		b1.position = Vec2D(0, 0)
+		b1.shape = Circle(2)
+		val b2 = new Body
+		b2.position = Vec2D(3, 0)
+		b2.shape = Circle(2)
+
+		val expectedCollision = Collision(b1, b2, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(0, 0))
+
+		assertEquals(Some(expectedCollision), narrowPhase.inspectCollision(b1, b2))
+	}
+
+
+
+	@Test
 	def inspectCircleAndNoShapeExpectNoCollision {
 		val narrowPhase = new SimpleNarrowPhase
 

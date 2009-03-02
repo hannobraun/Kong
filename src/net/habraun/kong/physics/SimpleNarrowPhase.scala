@@ -27,7 +27,8 @@ class SimpleNarrowPhase extends NarrowPhase {
 			val circle1 = b1.shape.asInstanceOf[Circle]
 			val circle2 = b2.shape.asInstanceOf[Circle]
 			val dSquared = (b1.position - b2.position).squaredLength
-			if (dSquared <= circle1.radius + circle2.radius) {
+			val radii = circle1.radius + circle2.radius
+			if (dSquared <= radii * radii) {
 				val normal1 = (b2.position - b1.position).normalize
 				val normal2 = (b1.position - b2.position).normalize
 				Some(Collision(b1, b2, normal1, normal2, Vec2D(0, 0)))
