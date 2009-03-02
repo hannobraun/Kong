@@ -55,4 +55,12 @@ class CollisionTest {
 	def createCollisionWithNonUnitNormalsExpectException {
 		Collision(new Body, new Body, Vec2D(1, 1), Vec2D(-1, -1), Vec2D(0, 0))
 	}
+
+
+
+	@Test
+	def createCollisionWithSlightlyOffNonUnitNormalsExpectTolerance {
+		Collision(new Body, new Body, Vec2D(1.02, 0), Vec2D(-1.02, 0), Vec2D(0, 0))
+		Collision(new Body, new Body, Vec2D(0.98, 0), Vec2D(-0.98, 0), Vec2D(0, 0))
+	}
 }
