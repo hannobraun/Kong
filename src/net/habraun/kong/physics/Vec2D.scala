@@ -75,8 +75,6 @@ case class Vec2D(x: Double, y: Double) {
 
 	def unary_- = Vec2D(x * -1, y * -1)
 
-	def inverse = -this
-
 
 
 	/**

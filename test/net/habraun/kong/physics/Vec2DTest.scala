@@ -79,14 +79,6 @@ class Vec2DTest {
 
 
 	@Test
-	def oldInverse {
-		val vec = Vec2D(1, 1)
-		assertEquals(Vec2D(-1, -1), vec.inverse)
-	}
-
-
-
-	@Test
 	def length {
 		val vec = Vec2D(2, 0)
 		assertEquals(2.0, vec.length, 0.0)
