@@ -149,7 +149,7 @@ object Main {
 			})
 
 			// Step the physics simulation
-			world.step(1.0 / 50.0)
+			world.step(timeStep)
 
 			// Check if the ball left the field and needs to be placed in the middle again
 			val  ballX = ball.body.position.x
