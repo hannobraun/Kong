@@ -136,6 +136,8 @@ object Main {
 
 		// Game loop
 		while (true) {
+			val timeBefore = System.currentTimeMillis
+
 			// Process input
 			paddles.foreach((paddle) => {
 				if (keyHandler.isPressed(paddle.getPlayer, UpKey))
@@ -178,7 +180,12 @@ object Main {
 				score.update
 			}})
 
-			Thread.sleep((timeStep * 1000).toLong)
+			val delta = System.currentTimeMillis - timeBefore
+			val missing = (timeStep * 1000).toLong - delta
+			if (missing > 0) {
+				Thread.sleep(missing)
+				Console.println(missing)
+			}
 		}
 	}
 		
