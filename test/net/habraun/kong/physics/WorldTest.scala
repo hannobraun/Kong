@@ -241,11 +241,11 @@ class WorldTest {
 
 		val b1 = new Body
 		b1.position = Vec2D(0, 1)
-		b1.mass = 5
+		b1.mass = 4
 		b1.velocity = Vec2D(-10, -10)
 		val b2 = new Body
 		b2.position = Vec2D(0, -1)
-		b2.mass = 10
+		b2.mass = 8
 		b2.velocity = Vec2D(5, 5)
 
 		world.narrowPhase = new NarrowPhase {
@@ -258,8 +258,8 @@ class WorldTest {
 		world.add(b2)
 		world.step(2.0)
 
-		assertEquals(Vec2D(-10, 10), b1.velocity)
-		assertEquals(Vec2D(5, -5), b2.velocity)
+		assertEquals(Vec2D(0, 80), b1.appliedImpulse)
+		assertEquals(Vec2D(0, -80), b2.appliedImpulse)
 	}
 
 
@@ -271,6 +271,7 @@ class WorldTest {
 		val b1 = new Body
 		b1.mass = Double.PositiveInfinity
 		val b2 = new Body
+		b2.mass = 5
 		b2.velocity = Vec2D(1, 1)
 
 		world.narrowPhase = new NarrowPhase {
@@ -283,8 +284,8 @@ class WorldTest {
 		world.add(b2)
 		world.step(2.0)
 
-		assertEquals(Vec2D(0, 0), b1.velocity)
-		assertEquals(Vec2D(1, -1), b2.velocity)
+		assertEquals(Vec2D(0, 0), b1.appliedImpulse)
+		assertEquals(Vec2D(0, -10), b2.appliedImpulse)
 	}
 
 
@@ -294,6 +295,7 @@ class WorldTest {
 		val world = new World
 
 		val b1 = new Body
+		b1.mass= 5
 		b1.velocity = Vec2D(1, 1)
 		val b2 = new Body
 		b2.mass = Double.PositiveInfinity
@@ -308,7 +310,57 @@ class WorldTest {
 		world.add(b2)
 		world.step(2.0)
 
-		assertEquals(Vec2D(1, -1), b1.velocity)
-		assertEquals(Vec2D(0, 0), b2.velocity)
+		assertEquals(Vec2D(0, -10), b1.appliedImpulse)
+		assertEquals(Vec2D(0, 0), b2.appliedImpulse)
+	}
+
+
+
+	@Test
+	def verifyForceIsAppliedBeforeCollisionDetection {
+		val world = new World
+
+		val broadPhase = new BroadPhase {
+			var v: Vec2D = null
+			def detectPossibleCollisions(bodies: List[Body]) = {
+				v = bodies(0).velocity
+				Nil
+			}
+		}
+		world.broadPhase = broadPhase
+
+		val body = new Body
+		body.mass = 5
+		body.applyForce(Vec2D(10, 0))
+		world.add(body)
+
+		world.step(2.0)
+
+		assertEquals(Vec2D(4, 0), broadPhase.v)
+	}
+
+
+
+	@Test
+	def verifyImpulseIsAppliedBeforeCollisionDetection {
+		val world = new World
+
+		val broadPhase = new BroadPhase {
+			var v: Vec2D = null
+			def detectPossibleCollisions(bodies: List[Body]) = {
+				v = bodies(0).velocity
+				Nil
+			}
+		}
+		world.broadPhase = broadPhase
+
+		val body = new Body
+		body.mass = 5
+		body.applyImpulse(Vec2D(10, 0))
+		world.add(body)
+
+		world.step(2.0)
+
+		assertEquals(Vec2D(2, 0), broadPhase.v)
 	}
 }
