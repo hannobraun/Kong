@@ -250,7 +250,7 @@ class WorldTest {
 
 		world.narrowPhase = new NarrowPhase {
 			def inspectCollision(b1: Body, b2: Body) = {
-				Some(Collision(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0)))
+				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0))))
 			}
 		}
 
@@ -276,7 +276,7 @@ class WorldTest {
 
 		world.narrowPhase = new NarrowPhase {
 			def inspectCollision(b1: Body, b2: Body) = {
-				Some(Collision(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0)))
+				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0))))
 			}
 		}
 
@@ -302,7 +302,7 @@ class WorldTest {
 
 		world.narrowPhase = new NarrowPhase {
 			def inspectCollision(b1: Body, b2: Body) = {
-				Some(Collision(b1, b2, Vec2D(0, 1), Vec2D(0, -1), Vec2D(0, 0)))
+				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, 1), Vec2D(0, -1), Vec2D(0, 0))))
 			}
 		}
 

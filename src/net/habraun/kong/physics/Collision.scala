@@ -23,22 +23,13 @@ package net.habraun.kong.physics
 /**
  * Models a collision between two bodies.
  * A collision has the following attributes:
- * * b1 and b2 are the two bodies that collide.
- * * normal1 is the collision normal for b1. This is the unit vector, that is a surface normal for b1 at the
- *   point of impact (pointing away from b1, towards b2). normal2 is the collision normal for b2 and is
- *   always the inverse of normal1.
- * * impactPoint is a position vector pointing at the point of impact. Determining the point of impact is not
- *   yet implemented and impactPoint is always Vec2D(0, 0).
+ * * t is the time of impact, relative to the timeframe that was inspected by the collision solver. A value
+ *   of 0.0 means, the collision took place at the beginning of the time frame, 1.0 means at the end. A value
+ *   of 0.5 would means, that the collision occured halfway through timeframe.
+ * * contact is the point of contact between the two bodies.
  */
 
-case class Collision(b1: Body, b2: Body, normal1: Vec2D, normal2: Vec2D, impactPoint: Vec2D) {
-	// Check if normal vectors are inverse to each other,
-	if (normal1 != -normal2)
-		throw new IllegalArgumentException("Both collision normals must be inverse to each other.")
-
-	// Check if vectors are unit vectors.
-	val absSquaredLength = Math.abs(normal1.squaredLength)
-	if (absSquaredLength > 1.05 || absSquaredLength < 0.95)
-		throw new IllegalArgumentException("Normals must be unit vectors. Normal 1: " + normal1
-				+ ", Normal 2: " + normal2)
+case class Collision(t: Double, contact: Contact) {
+	if (t < 0.0 || t > 1.0) throw new IllegalArgumentException("Time of impact must be between 0.0 and 1.0.")
+	if (contact == null) throw new NullPointerException("contact must not be null.")
 }

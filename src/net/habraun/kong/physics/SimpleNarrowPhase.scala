@@ -31,7 +31,7 @@ class SimpleNarrowPhase extends NarrowPhase {
 			if (dSquared <= radii * radii) {
 				val normal1 = (b2.position - b1.position).normalize
 				val normal2 = (b1.position - b2.position).normalize
-				Some(Collision(b1, b2, normal1, normal2, Vec2D(0, 0)))
+				Some(Collision(1.0, Contact(b1, b2, normal1, normal2, Vec2D(0, 0))))
 			}
 			else {
 				None
@@ -44,8 +44,8 @@ class SimpleNarrowPhase extends NarrowPhase {
 			val possibleCollision = circleLineSegment(b2, b1, b2.shape.asInstanceOf[Circle],
 					b1.shape.asInstanceOf[LineSegment])
 			if (possibleCollision.isDefined) {
-				val collision = possibleCollision.getOrElse { throw new AssertionError }
-				Some(Collision(b1, b2, collision.normal2, collision.normal1, Vec2D(0, 0)))
+				val contact = possibleCollision.getOrElse({ throw new AssertionError }).contact
+				Some(Collision(1.0, Contact(b1, b2, contact.normal2, contact.normal1, Vec2D(0, 0))))
 			}
 			else {
 				possibleCollision
@@ -80,7 +80,7 @@ class SimpleNarrowPhase extends NarrowPhase {
 				val t = -(((p.x - cp.x) * v.x) + ((p.y - cp.y) * v.y)) / ((d.x * v.x) + (d.y * v.y))
 				val normal1 = (p + (d * t)).normalize
 				val normal2 = -normal1
-					Some(Collision(b1, b2, normal1, normal2, Vec2D(0, 0)))
+					Some(Collision(1.0, Contact(b1, b2, normal1, normal2, Vec2D(0, 0))))
 			}
 			else {
 				None

@@ -129,24 +129,24 @@ class World {
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
 		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) yield {
 			// Compute the part of the velocities that points in the direction of the collision normals.
-			val v1 = collision.b1.velocity.split(collision.normal1)._2
-			val v2 = collision.b2.velocity.split(collision.normal2)._2
+			val v1 = collision.contact.b1.velocity.split(collision.contact.normal1)._2
+			val v2 = collision.contact.b2.velocity.split(collision.contact.normal2)._2
 
 			// Apply impulses along the collision normals.
-			val m1 = collision.b1.mass
-			val m2 = collision.b2.mass
+			val m1 = collision.contact.b1.mass
+			val m2 = collision.contact.b2.mass
 			if (m1 == Double.PositiveInfinity) {
 				val impulse = (v1 - v2) * 2 * m2
-				collision.b2.applyImpulse(impulse)
+				collision.contact.b2.applyImpulse(impulse)
 			}
 			else if (m2 == Double.PositiveInfinity) {
 				val impulse = (v2 - v1) * 2 * m1
-				collision.b1.applyImpulse(impulse)
+				collision.contact.b1.applyImpulse(impulse)
 			}
 			else {
 				val impulse = (v2 - v1) * 2 * m1 * m2 / (m1 + m2)
-				collision.b1.applyImpulse(impulse)
-				collision.b2.applyImpulse(-impulse)
+				collision.contact.b1.applyImpulse(impulse)
+				collision.contact.b2.applyImpulse(-impulse)
 			}
 		}
 

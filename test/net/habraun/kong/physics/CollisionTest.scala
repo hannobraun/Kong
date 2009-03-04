@@ -29,38 +29,31 @@ class CollisionTest {
 
 	@Test
 	def verifyHasAttributes {
-		val b1 = new Body
-		val b2 = new Body
-		val normal1 = Vec2D(0, 1)
-		val normal2 = Vec2D(0, -1)
-		val impactPoint = Vec2D(10, 10)
-		val collision = Collision(b1, b2, normal1, normal2, impactPoint)
-		assertEquals(b1, collision.b1)
-		assertEquals(b2, collision.b2)
-		assertEquals(normal1, collision.normal1)
-		assertEquals(normal2, collision.normal2)
-		assertEquals(impactPoint, collision.impactPoint)
+		val t = 0.5
+		val contact = Contact(new Body, new Body, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(5, 5))
+		val collision = Collision(t, contact)
+		assertEquals(t, collision.t, 0.0)
+		assertEquals(contact, collision.contact)
 	}
 
 
 
 	@Test { val expected = classOf[IllegalArgumentException] }
-	def createCollisionWithNonInverseNormalsExpectException {
-		Collision(new Body, new Body, Vec2D(1, 0), Vec2D(0, -1), Vec2D(0, 0))
+	def createCollisionWithInvalidTime {
+		Collision(1.1, Contact(new Body, new Body, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(5, 5)))
 	}
 
 
 
 	@Test { val expected = classOf[IllegalArgumentException] }
-	def createCollisionWithNonUnitNormalsExpectException {
-		Collision(new Body, new Body, Vec2D(1, 1), Vec2D(-1, -1), Vec2D(0, 0))
+	def createCollisionWithInvalidTime2 {
+		Collision(-1.0, Contact(new Body, new Body, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(5, 5)))
 	}
 
 
 
-	@Test
-	def createCollisionWithSlightlyOffNonUnitNormalsExpectTolerance {
-		Collision(new Body, new Body, Vec2D(1.02, 0), Vec2D(-1.02, 0), Vec2D(0, 0))
-		Collision(new Body, new Body, Vec2D(0.98, 0), Vec2D(-0.98, 0), Vec2D(0, 0))
+	@Test { val expected = classOf[NullPointerException] }
+	def createCollisionWithNullContact {
+		Collision(0.5, null)
 	}
 }
