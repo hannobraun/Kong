@@ -93,6 +93,46 @@ class WorldTest {
 
 
 	@Test
+	def addBodyApplyImpulseCheckVelocity {
+		val world = new World
+		val body = new Body
+		body.mass = 5
+		body.velocity = Vec2D(3, 0)
+		body.applyImpulse(Vec2D(5, 0))
+		world.add(body)
+		world.step(2.0)
+		assertEquals(Vec2D(4, 0), body.velocity)
+	}
+
+
+
+	@Test
+	def addBodyApplyImpulseCheckVelocity2 {
+		val world = new World
+		val body = new Body
+		body.mass = 5
+		body.velocity = Vec2D(3, 0)
+		body.applyImpulse(Vec2D(5, 0))
+		world.add(body)
+		world.step(5.0)
+		assertEquals(Vec2D(4, 0), body.velocity)
+	}
+
+
+
+	@Test
+	def addBodyApplyImpulseCheckImpulse {
+		val world = new World
+		val body = new Body
+		body.applyImpulse(Vec2D(10, 10))
+		world.add(body)
+		world.step(2.0)
+		assertEquals(Vec2D(0, 0), body.appliedImpulse)
+	}
+
+
+
+	@Test
 	def addBodyDisallowXMovementStepCheckPosition {
 		val world = new World
 		val body = new Body
