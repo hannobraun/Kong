@@ -178,6 +178,14 @@ class BodyTest {
 
 
 
+	@Test { val expected = classOf[NullPointerException] }
+	def applyNullForce {
+		val body = new Body
+		body.applyForce(null)
+	}
+
+
+
 	@Test
 	def applyForceResetForce {
 		val body = new Body
