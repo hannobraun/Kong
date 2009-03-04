@@ -122,7 +122,7 @@ class Body {
 	def appliedForce = _appliedForce
 
 	def applyForce(f: Vec2D) {
-		_appliedForce = _appliedForce + f
+		_appliedForce += f
 	}
 
 	def resetForce {
