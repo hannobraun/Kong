@@ -188,6 +188,52 @@ class BodyTest {
 
 
 
+	@Test
+	def checkInitialAppliedImpulse {
+		val body = new Body
+		assertEquals(Vec2D(0, 0), body.appliedImpulse)
+	}
+
+
+
+	@Test
+	def applyImpulse {
+		val body = new Body
+		val impulse = Vec2D(10, 10)
+		body.applyImpulse(impulse)
+		assertEquals(impulse, body.appliedImpulse)
+	}
+
+
+
+	@Test
+	def applyTwoImpulses {
+		val body = new Body
+		body.applyImpulse(Vec2D(2, 1))
+		body.applyImpulse(Vec2D(1, 2))
+		assertEquals(Vec2D(3, 3), body.appliedImpulse)
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def applyNullImpulse {
+		val body = new Body
+		body.applyImpulse(null)
+	}
+
+
+
+	@Test
+	def applyAndResetImpulse {
+		val body = new Body
+		body.applyImpulse(Vec2D(10, 10))
+		body.resetImpulse
+		assertEquals(Vec2D(0, 0), body.appliedImpulse)
+	}
+
+
+
 	@Test { val expected = classOf[NullPointerException] }
 	def applyNullForceExpectException {
 		val body = new Body

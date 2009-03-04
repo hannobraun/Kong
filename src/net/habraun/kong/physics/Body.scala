@@ -132,6 +132,28 @@ class Body {
 
 
 	/**
+	 * Applies an impulse to the body.
+	 * The effect of the impulse is computed when the world simulation is stepped.
+	 * Valling this method several times between steps will simply add the applied impulses up. When the
+	 * simulation is stepped, the sum of all the impulses is applied.
+	 * An impulse must never be null.
+	 */
+
+	private[this] var _appliedImpulse = Vec2D(0, 0)
+
+	def appliedImpulse = _appliedImpulse
+
+	def applyImpulse(impulse: Vec2D) {
+		_appliedImpulse += impulse
+	}
+
+	def resetImpulse {
+		_appliedImpulse = Vec2D(0, 0)
+	}
+
+
+
+	/**
 	 * Sets the maximum velocity for this body.
 	 * After creation, a body has a maximum velocity of Double.PositiveInfinity.
 	 * The maximum velocity must never be negative.
