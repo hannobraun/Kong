@@ -104,9 +104,9 @@ class SimpleNarrowPhase extends NarrowPhase {
 		val circle = b1.shape.asInstanceOf[Circle]
 		val lineSegment = b2.shape.asInstanceOf[LineSegment]
 
-		val p = b2.position + lineSegment.p1
-		val d = (lineSegment.p2 - lineSegment.p1).normalize
-		val tmax = (lineSegment.p2 - lineSegment.p1).length
+		val p = b2.position + lineSegment.p
+		val d = lineSegment.d.normalize
+		val tmax = lineSegment.d.length
 
 		val m = p - b1.position
 		val b = m * d
@@ -117,7 +117,7 @@ class SimpleNarrowPhase extends NarrowPhase {
 			val t2 = -b - Math.sqrt(dis)
 			if (t2 >= 0 && t1 <= tmax) {
 				val cp = b1.position
-				val v = lineSegment.p2 - lineSegment.p1
+				val v = lineSegment.d
 				val t = -(((p.x - cp.x) * v.x) + ((p.y - cp.y) * v.y)) / ((d.x * v.x) + (d.y * v.y))
 				val normal1 = (p + (d * t)).normalize
 				val normal2 = -normal1

@@ -28,26 +28,41 @@ import org.junit.Assert._
 class LineSegmentTest {
 
 	@Test
-	def createLineSegmentCheckPoint1 {
-		val p1 = Vec2D(0, 0)
-		val segment = new LineSegment(p1, Vec2D(10, 10))
-		assertEquals(p1, segment.p1)
-	}
-
-
-
-	@Test
-	def createLineSegmentCheckPoint2 {
-		val p2 = Vec2D(10, 10)
-		val segment = new LineSegment(Vec2D(0, 0), p2)
-		assertEquals(p2, segment.p2)
-	}
-
-
-
-	@Test
-	def createLineSegmentVerifyIsShape {
-		val segment = new LineSegment(Vec2D(0, 0), Vec2D(10, 10))
+	def verifyIsShape {
+		val segment = LineSegment(Vec2D(0, 0), Vec2D(10, 10))
 		assertTrue(segment.isInstanceOf[Shape])
+	}
+
+
+
+	@Test
+	def verifyHasAttributes {
+		val p = Vec2D(5, 5)
+		val d = Vec2D(2, 1)
+		val segment = LineSegment(p, d)
+		
+		assertEquals(p, segment.p)
+		assertEquals(d, segment.d)
+	}
+
+
+
+	@Test { val expected = classOf[IllegalArgumentException] }
+	def createWithZeroDirectionVectorExpectException {
+		LineSegment(Vec2D(2, 2), Vec2D(0, 0))
+	}
+
+
+	
+	@Test { val expected = classOf[NullPointerException] }
+	def createWithPositionVectorNullExpectException {
+		LineSegment(null, Vec2D(1, 1))
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def createWithDirectionVectorNullExpectException {
+		LineSegment(Vec2D(0, 0), null)
 	}
 }
