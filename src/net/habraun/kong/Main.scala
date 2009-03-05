@@ -184,7 +184,6 @@ object Main {
 			val missing = (timeStep * 1000).toLong - delta
 			if (missing > 0) {
 				Thread.sleep(missing)
-				Console.println(missing)
 			}
 		}
 	}	
