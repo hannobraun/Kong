@@ -159,8 +159,8 @@ class World {
 			// after the movement has been carried out. We don't want that, we want the bodies to stop right
 			// at the point of impact. Let's set them back, so the regular movement will put them right where
 			// we want them.
-			b1.position -= b1.velocity * delta * (1.0 - collision.t)
-			b2.position -= b2.velocity * delta * (1.0 - collision.t)
+			b1.position -= b1.velocity * delta * (1.0 - collision.t + 0.0001)
+			b2.position -= b2.velocity * delta * (1.0 - collision.t + 0.0001)
 		}
 
 		// Apply speed.
