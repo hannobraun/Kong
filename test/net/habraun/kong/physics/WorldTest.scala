@@ -224,7 +224,7 @@ class WorldTest {
 
 		val narrowPhase = new NarrowPhase {
 			var passedPairs: List[(Body, Body)] = Nil
-			def inspectCollision(b1: Body, b2: Body) = { passedPairs = passedPairs:::List((b1, b2)); None }
+			def inspectCollision(delta: Double, b1: Body, b2: Body) = { passedPairs = passedPairs:::List((b1, b2)); None }
 		}
 		world.narrowPhase = narrowPhase
 
@@ -249,7 +249,7 @@ class WorldTest {
 		b2.velocity = Vec2D(5, 5)
 
 		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
+			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
 				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0))))
 			}
 		}
@@ -275,7 +275,7 @@ class WorldTest {
 		b2.velocity = Vec2D(1, 1)
 
 		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
+			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
 				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0))))
 			}
 		}
@@ -301,7 +301,7 @@ class WorldTest {
 		b2.mass = Double.PositiveInfinity
 
 		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
+			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
 				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, 1), Vec2D(0, -1), Vec2D(0, 0))))
 			}
 		}

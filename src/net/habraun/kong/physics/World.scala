@@ -116,7 +116,9 @@ class World {
 
 		// Collision detection.
 		val possibleCollisionPairs = broadPhase.detectPossibleCollisions(bodies.toList)
-		val possibleCollisions = possibleCollisionPairs.map((pair) => narrowPhase.inspectCollision(pair._1, pair._2))
+		val possibleCollisions = possibleCollisionPairs.map((pair) => {
+			narrowPhase.inspectCollision(delta, pair._1, pair._2)
+		})
 
 		// Compute collision effects.
 		// This is a tricky construction. The "possibleCollision <- collision" part is like an outer for loop

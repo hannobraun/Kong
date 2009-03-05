@@ -30,9 +30,9 @@ package net.habraun.kong.physics
 trait NarrowPhase {
 
 	/**
-	 * Determines if the two bodies collides, and if they do, returns a Collision object that describes the
+	 * Determines if the two bodies collide, and if they do, returns a Collision object that describes the
 	 * collision. If the bodies do not collide, this method returns None.
 	 */
 
-	def inspectCollision(b1: Body, b2: Body): Option[Collision]
+	def inspectCollision(delta: Double, b1: Body, b2: Body): Option[Collision]
 }
