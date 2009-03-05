@@ -363,4 +363,40 @@ class WorldTest {
 
 		assertEquals(Vec2D(2, 0), broadPhase.v)
 	}
+
+
+
+	@Test
+	def addBodiesThatWouldIntersectAfterMovementVerifyTheyDont {
+		val world = new World
+
+		val b1 = new Body
+		b1.shape = Circle(2)
+		b1.position = Vec2D(0, 0)
+		b1.velocity = Vec2D(1, 0)
+		val b2 = new Body
+		b2.shape = Circle(2)
+		b2.position = Vec2D(5, 0)
+		b2.velocity = Vec2D(0, 0)
+		world.add(b1)
+		world.add(b2)
+
+		val broadPhase = new BroadPhase {
+			def detectPossibleCollisions(bodies: List[Body]) = {
+				(b1, b2)::Nil
+			}
+		}
+		world.broadPhase = broadPhase
+
+		val narrowPhase = new NarrowPhase {
+			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+				Some(Collision(0.5, Contact(b1, b2, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(3, 0))))
+			}
+		}
+		world.narrowPhase = narrowPhase
+
+		world.step(2.0)
+
+		assertEquals(Vec2D(1, 0), b1.position)
+	}
 }

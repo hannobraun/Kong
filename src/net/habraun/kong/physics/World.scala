@@ -130,26 +130,37 @@ class World {
 		// Despite the long explanation, what this does is actually pretty simple: We loop through the list
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
 		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) yield {
+			// Get the bodies out of the contact, so we can access them easier.
+			val b1 = collision.contact.b1
+			val b2 = collision.contact.b2
+
 			// Compute the part of the velocities that points in the direction of the collision normals.
-			val v1 = collision.contact.b1.velocity.split(collision.contact.normal1)._2
-			val v2 = collision.contact.b2.velocity.split(collision.contact.normal2)._2
+			val v1 = b1.velocity.split(collision.contact.normal1)._2
+			val v2 = b2.velocity.split(collision.contact.normal2)._2
 
 			// Apply impulses along the collision normals.
-			val m1 = collision.contact.b1.mass
-			val m2 = collision.contact.b2.mass
+			val m1 = b1.mass
+			val m2 = b2.mass
 			if (m1 == Double.PositiveInfinity) {
 				val impulse = (v1 - v2) * 2 * m2
-				collision.contact.b2.applyImpulse(impulse)
+				b2.applyImpulse(impulse)
 			}
 			else if (m2 == Double.PositiveInfinity) {
 				val impulse = (v2 - v1) * 2 * m1
-				collision.contact.b1.applyImpulse(impulse)
+				b1.applyImpulse(impulse)
 			}
 			else {
 				val impulse = (v2 - v1) * 2 * m1 * m2 / (m1 + m2)
-				collision.contact.b1.applyImpulse(impulse)
-				collision.contact.b2.applyImpulse(-impulse)
+				b1.applyImpulse(impulse)
+				b2.applyImpulse(-impulse)
 			}
+
+			// If the time of impact given by the collision is smaller than 1.0, the bodies would overlap
+			// after the movement has been carried out. We don't want that, we want the bodies to stop right
+			// at the point of impact. Let's set them back, so the regular movement will put them right where
+			// we want them.
+			b1.position -= b1.velocity * delta * (1.0 - collision.t)
+			b2.position -= b2.velocity * delta * (1.0 - collision.t)
 		}
 
 		// Apply speed.
