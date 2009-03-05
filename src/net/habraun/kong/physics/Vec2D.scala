@@ -105,6 +105,14 @@ case class Vec2D(x: Double, y: Double) {
 
 
 
+	/**
+	 * Returns the orthogonal vector to this vector that is rotated by 90 degrees to the left.
+	 */
+
+	def orthogonal = Vec2D(-y, x)
+
+
+
 
 	/**
 	 * Splits the vector into two parts, one of which is orthogonal to the given vector, the other being

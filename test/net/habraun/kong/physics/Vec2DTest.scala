@@ -103,6 +103,14 @@ class Vec2DTest {
 
 
 	@Test
+	def orthogonal {
+		val vec = Vec2D(2, 1)
+		assertEquals(Vec2D(-1, 2), vec.orthogonal)
+	}
+
+
+
+	@Test
 	def splitCheckOrthogonalPart {
 		val vec1 = Vec2D(5, 5)
 		val vec2 = Vec2D(1, 0)
