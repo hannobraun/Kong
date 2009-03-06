@@ -135,8 +135,8 @@ class World {
 			val b2 = collision.contact.b2
 
 			// Compute the part of the velocities that points in the direction of the collision normals.
-			val v1 = b1.velocity.split(collision.contact.normal1)._2
-			val v2 = b2.velocity.split(collision.contact.normal2)._2
+			val v1 = b1.velocity.project(collision.contact.normal1)
+			val v2 = b2.velocity.project(collision.contact.normal2)
 
 			// Apply impulses along the collision normals.
 			val m1 = b1.mass
