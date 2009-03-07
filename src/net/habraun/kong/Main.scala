@@ -20,7 +20,6 @@ package net.habraun.kong
 
 
 
-import input._
 import physics._
 
 import java.awt._
@@ -30,6 +29,7 @@ import javax.swing._
 
 import edu.umd.cs.piccolo._
 import edu.umd.cs.piccolo.nodes._
+import net.habraun.piccoinput._
 
 
 

@@ -20,8 +20,9 @@ package net.habraun.kong
 
 
 
-import input._
 import physics._
+
+import net.habraun.piccoinput._
 
 
 
