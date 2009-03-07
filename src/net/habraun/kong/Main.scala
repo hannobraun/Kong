@@ -47,7 +47,7 @@ object Main {
 
 	def main(args: Array[String]) {
 		// Configure the main window.
-		val frame = new JFrame("Kong 0.2")
+		val frame = new JFrame("Kong 0.3")
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
 		frame.setSize(screenSizeX + 12, screenSizeY + 35)
 
