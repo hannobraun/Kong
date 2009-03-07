@@ -20,8 +20,6 @@ package net.habraun.kong
 
 
 
-import physics._
-
 import java.awt._
 import java.awt.event._
 import java.awt.geom._
@@ -30,6 +28,7 @@ import javax.swing._
 import edu.umd.cs.piccolo._
 import edu.umd.cs.piccolo.nodes._
 import net.habraun.piccoinput._
+import net.habraun.scd._
 
 
 
