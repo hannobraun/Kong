@@ -34,7 +34,7 @@ class Ball(startingX: Int, startingY: Int) {
 	val body = new Body
 	body.shape = Circle(Ball.radius)
 	body.mass = Ball.mass
-	body.maxVelocity = 500
+	body.maxVelocity = 550
 
 
 
