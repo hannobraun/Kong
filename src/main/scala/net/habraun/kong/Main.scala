@@ -127,7 +127,7 @@ object Main {
 
 		// Initialize world for physics simulation and add all bodies
 		val world = new World[Body]
-		paddles.foreach((paddle) => world.add(paddle.body))
+		paddles.foreach( world.add( _ ) )
 		world.add(ball.body)
 		world.add(topBorder)
 		world.add(bottomBorder)
@@ -170,7 +170,7 @@ object Main {
 			// Display game state
 			SwingUtilities.invokeLater(new Runnable { def run {
 				for (i <- 0 until paddles.length) {
-					val position = paddles(i).body.position
+					val position = paddles( i ).position
 					val x = position.x - Paddle.radius
 					val y = position.y - Paddle.radius
 
