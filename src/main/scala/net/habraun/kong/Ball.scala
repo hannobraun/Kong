@@ -30,14 +30,13 @@ import net.habraun.sd.math.Vec2D
 
 
 
-class Ball(startingX: Int, startingY: Int) {
+class Ball( startingX: Int, startingY: Int ) extends Body with Circle with VelocityConstraint {
 	
 	private val r = new Random
 
-	val body = new Body with Circle with VelocityConstraint {}
-	body.radius = Ball.radius
-	body.mass = Ball.mass
-	body.maxVelocity = 550
+	radius = Ball.radius
+	mass = Ball.mass
+	maxVelocity = 550
 
 
 
@@ -50,8 +49,8 @@ class Ball(startingX: Int, startingY: Int) {
 		val xVel = xMod * vel(r, 100, 3)
 		val yVel = yMod * vel(r, 0, 2)
 
-		body.velocity = Vec2D(xVel, yVel)
-		body.position = Vec2D(startingX, startingY)
+		velocity = Vec2D( xVel, yVel )
+		position = Vec2D( startingX, startingY )
 	}
 }
 

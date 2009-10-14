@@ -128,7 +128,7 @@ object Main {
 		// Initialize world for physics simulation and add all bodies
 		val world = new World[Body]
 		paddles.foreach( world.add( _ ) )
-		world.add(ball.body)
+		world.add( ball )
 		world.add(topBorder)
 		world.add(bottomBorder)
 
@@ -157,7 +157,7 @@ object Main {
 			world.step(timeStep)
 
 			// Check if the ball left the field and needs to be placed in the middle again
-			val  ballX = ball.body.position.x
+			val  ballX = ball.position.x
 			if (ballX > screenSizeX) {
 				score.increaseScore1
 				ball.init
@@ -177,7 +177,7 @@ object Main {
 					paddleNodes(i).setTransform(AffineTransform.getTranslateInstance(x, y))
 				}
 
-				val position = ball.body.position
+				val position = ball.position
 				val x = position.x - Ball.radius
 				val y = position.y - Ball.radius
 				ballNode.setTransform(AffineTransform.getTranslateInstance(x, y))
