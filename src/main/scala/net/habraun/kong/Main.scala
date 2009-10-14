@@ -28,7 +28,10 @@ import javax.swing._
 import edu.umd.cs.piccolo._
 import edu.umd.cs.piccolo.nodes._
 import net.habraun.piccoinput._
-import net.habraun.scd._
+import net.habraun.sd.World
+import net.habraun.sd.collision.shape.LineSegment
+import net.habraun.sd.core.Body
+import net.habraun.sd.math.Vec2D
 
 
 
@@ -109,18 +112,21 @@ object Main {
 		canvas.getLayer.addChild(ballNode)
 
 		// Initialize the borders
-		val borderShape = LineSegment(Vec2D(0, 0), Vec2D(screenSizeX, 0))
-		val topBorder = new Body
+		val p = Vec2D( 0, 0 )
+		val d = Vec2D( screenSizeX, 0 )
+		val topBorder = new Body with LineSegment {}
+		val bottomBorder = new Body with LineSegment {}
 		topBorder.mass = Double.PositiveInfinity
-		topBorder.shape = borderShape
-		val bottomBorder = new Body
 		bottomBorder.mass = Double.PositiveInfinity
-		bottomBorder.shape = borderShape
-		topBorder.position = Vec2D(0, 0)
-		bottomBorder.position = Vec2D(0, screenSizeY)
+		topBorder.p = p
+		bottomBorder.p = p
+		topBorder.d = d
+		bottomBorder.d = d
+		topBorder.position = Vec2D( 0, 0 )
+		bottomBorder.position = Vec2D( 0, screenSizeY )
 
 		// Initialize world for physics simulation and add all bodies
-		val world = new World
+		val world = new World[Body]
 		paddles.foreach((paddle) => world.add(paddle.body))
 		world.add(ball.body)
 		world.add(topBorder)

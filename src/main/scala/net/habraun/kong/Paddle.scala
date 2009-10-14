@@ -21,17 +21,20 @@ package net.habraun.kong
 
 
 import net.habraun.piccoinput._
-import net.habraun.scd._
+import net.habraun.sd.collision.shape.Circle
+import net.habraun.sd.core.Body
+import net.habraun.sd.dynamics.PositionConstraint
+import net.habraun.sd.math.Vec2D
 
 
 
 class Paddle(player: Player, initialX: Float, initialY: Float) {
 
-	val body = new Body
+	val body = new Body with Circle  with PositionConstraint {}
 	body.mass = 100
-	body.shape = Circle(Paddle.radius)
+	body.radius = Paddle.radius
 	body.position = Vec2D(initialX, initialY)
-	body.allowXMovement(false)
+	body.xConstraint = Some( initialX )
 	//body.setDamping(10)
 
 

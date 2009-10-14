@@ -23,7 +23,10 @@ package net.habraun.kong
 import java.util._
 
 
-import net.habraun.scd._
+import net.habraun.sd.collision.shape.Circle
+import net.habraun.sd.core.Body
+import net.habraun.sd.dynamics.VelocityConstraint
+import net.habraun.sd.math.Vec2D
 
 
 
@@ -31,8 +34,8 @@ class Ball(startingX: Int, startingY: Int) {
 	
 	private val r = new Random
 
-	val body = new Body
-	body.shape = Circle(Ball.radius)
+	val body = new Body with Circle with VelocityConstraint {}
+	body.radius = Ball.radius
 	body.mass = Ball.mass
 	body.maxVelocity = 550
 
