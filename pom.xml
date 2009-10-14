@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 
 	<name>Kong</name>
-	<inceptionYear>2009</inceptionYear>
+	<inceptionYear>2008</inceptionYear>
 	<description>A simple Pong-inspired game.</description>
 	<url>http://habraun.net/</url>
 
