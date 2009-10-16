@@ -29,6 +29,7 @@ import input.InputSetup
 import input.PlayerLeft
 import input.PlayerRight
 import input.UpKey
+import ui.BallView
 import ui.PaddleView
 import ui.UISetup
 import util.PiccoUtil.updateSG
@@ -82,6 +83,7 @@ object Main {
 		val frame = uiSetup.createFrame
 		val canvas = uiSetup.createCanvas( frame )
 		val paddleViews = paddles.map( new PaddleView( _ ) )
+		val ballView = new BallView( ball )
 
 		// Set up the input handling
 		val inputSetup = new InputSetup
@@ -89,13 +91,7 @@ object Main {
 
 		// Add views to the canvas.
 		paddleViews.foreach((node) => canvas.getLayer.addChild(node))
-
-		// Initialize the scene graph node for the ball
-		val ballShape = new Ellipse2D.Double(0, 0, Ball.radius * 2, Ball.radius * 2)
-		val ballNode = new PPath(ballShape)
-		ballNode.setPaint(Color.RED)
-		ballNode.setStroke(defaultStroke)
-		canvas.getLayer.addChild(ballNode)
+		canvas.getLayer.addChild( ballView )
 
 		// Initialize score
 		val score = new Score(screenSizeX / 2, screenSizeY / 2)
