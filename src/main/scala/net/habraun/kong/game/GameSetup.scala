@@ -23,6 +23,8 @@ package net.habraun.kong.game
 import input.PlayerLeft
 import input.PlayerRight
 
+import net.habraun.sd.math.Vec2D
+
 
 
 class GameSetup {
@@ -48,5 +50,15 @@ class GameSetup {
 		ball.init
 
 		ball
+	}
+
+
+
+	def createBorders = {
+		// Initialize the borders
+		val topBorder = new Border( Vec2D( 0, 0 ) )
+		val bottomBorder = new Border( Vec2D( 0, Main.screenSizeY ) )
+
+		List( topBorder, bottomBorder )
 	}
 }

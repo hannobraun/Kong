@@ -77,6 +77,7 @@ object Main {
 		val gameSetup = new GameSetup
 		val paddles = gameSetup.createPaddles
 		val ball = gameSetup.createBall
+		val borders = gameSetup.createBorders
 
 		// Initialize scene graph nodes for paddles
 		val paddleShape = new Ellipse2D.Double(0, 0, Paddle.radius * 2, Paddle.radius * 2)
@@ -96,16 +97,11 @@ object Main {
 		ballNode.setStroke(defaultStroke)
 		canvas.getLayer.addChild(ballNode)
 
-		// Initialize the borders
-		val topBorder = new Border( Vec2D( 0, 0 ) )
-		val bottomBorder = new Border( Vec2D( 0, screenSizeY ) )
-
 		// Initialize world for physics simulation and add all bodies
 		val world = new World[Body]
 		paddles.foreach( world.add( _ ) )
 		world.add( ball )
-		world.add(topBorder)
-		world.add(bottomBorder)
+		borders.foreach( world.add( _ ) )
 
 		// Initialize score
 		val score = new Score(screenSizeX / 2, screenSizeY / 2)
