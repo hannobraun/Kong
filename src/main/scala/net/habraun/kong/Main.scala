@@ -94,8 +94,9 @@ object Main {
 		// Set up the input handling
 		val inputSetup = new InputSetup
 		val keyHandler = inputSetup.createKeyHandler( canvas )		
-		
-		frame.setVisible(true)
+
+		// Make UI visible.
+		frame.setVisible( true )
 		canvas.requestFocusInWindow
 
 		// Game loop
