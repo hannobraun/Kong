@@ -31,6 +31,7 @@ import input.PlayerRight
 import input.UpKey
 import ui.BallView
 import ui.PaddleView
+import ui.Score
 import ui.UISetup
 import util.PiccoUtil.updateSG
 
