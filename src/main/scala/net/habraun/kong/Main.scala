@@ -25,6 +25,7 @@ import game.Border
 import game.GameSetup
 import game.Paddle
 import input.DownKey
+import input.InputProcessor
 import input.InputSetup
 import input.PlayerLeft
 import input.PlayerRight
@@ -70,19 +71,14 @@ object Main {
 		// Setup
 		val setup = new Setup
 
+		// Initialize main loop functions.
+		val processInput = new InputProcessor
+
 		// Game loop
 		while (true) {
 			val timeBefore = System.currentTimeMillis
 
-			// Process input
-			setup.paddles.foreach((paddle) => {
-				if (setup.keyHandler.isPressed(paddle.getPlayer, UpKey))
-					paddle.movementUp
-				else if (setup.keyHandler.isPressed(paddle.getPlayer, DownKey))
-					paddle.movementDown
-				else
-					paddle.movementStop
-			})
+			processInput( setup.keyHandler, setup.paddles )
 
 			// Step the physics simulation
 			setup.world.step(timeStep)
