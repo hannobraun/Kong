@@ -21,6 +21,7 @@ package net.habraun.kong
 
 
 import game.Ball
+import game.Border
 import game.GameSetup
 import game.Paddle
 import input.DownKey
@@ -96,18 +97,8 @@ object Main {
 		canvas.getLayer.addChild(ballNode)
 
 		// Initialize the borders
-		val p = Vec2D( 0, 0 )
-		val d = Vec2D( screenSizeX, 0 )
-		val topBorder = new Body with LineSegment {}
-		val bottomBorder = new Body with LineSegment {}
-		topBorder.mass = Double.PositiveInfinity
-		bottomBorder.mass = Double.PositiveInfinity
-		topBorder.p = p
-		bottomBorder.p = p
-		topBorder.d = d
-		bottomBorder.d = d
-		topBorder.position = Vec2D( 0, 0 )
-		bottomBorder.position = Vec2D( 0, screenSizeY )
+		val topBorder = new Border( Vec2D( 0, 0 ) )
+		val bottomBorder = new Border( Vec2D( 0, screenSizeY ) )
 
 		// Initialize world for physics simulation and add all bodies
 		val world = new World[Body]
