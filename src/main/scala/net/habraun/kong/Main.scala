@@ -20,6 +20,7 @@ package net.habraun.kong
 
 
 
+import game.GameSetup
 import input.DownKey
 import input.InputSetup
 import input.PlayerLeft
@@ -57,8 +58,6 @@ object Main {
 
 	val timeStep = 1.0 / 50.0
 
-	val border = 20
-
 
 
 	def main(args: Array[String]) {
@@ -71,10 +70,10 @@ object Main {
 		val inputSetup = new InputSetup
 		val keyHandler = inputSetup.createKeyHandler( canvas )
 
-		// Initialize paddles
-		val paddle1 = new Paddle(PlayerLeft, border + Paddle.radius, screenSizeY / 2)
-		val paddle2 = new Paddle(PlayerRight, screenSizeX - border - Paddle.radius, screenSizeY / 2)
-		val paddles = paddle1::paddle2::Nil
+		// Set up game.
+		val gameSetup = new GameSetup
+		val paddles = gameSetup.createPaddles
+		val ball = gameSetup.createBall
 
 		// Initialize scene graph nodes for paddles
 		val paddleShape = new Ellipse2D.Double(0, 0, Paddle.radius * 2, Paddle.radius * 2)
@@ -86,10 +85,6 @@ object Main {
 			node
 		})
 		paddleNodes.foreach((node) => canvas.getLayer.addChild(node))
-
-		// Initialize the ball
-		val ball = new Ball(screenSizeX / 2, screenSizeY / 2)
-		ball.init
 
 		// Initialize the scene graph node for the ball
 		val ballShape = new Ellipse2D.Double(0, 0, Ball.radius * 2, Ball.radius * 2)
