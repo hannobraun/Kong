@@ -37,10 +37,7 @@ class Renderer extends Function3[ List[ PaddleView ], BallView, ScoreView, Unit 
 				paddleView.update
 			}
 
-			val position = ballView.ball.position
-			val x = position.x - Ball.radius
-			val y = position.y - Ball.radius
-			ballView.setTransform( AffineTransform.getTranslateInstance( x, y ) )
+			ballView.update
 
 			scoreView.update
 		} )

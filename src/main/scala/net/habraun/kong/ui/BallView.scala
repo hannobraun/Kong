@@ -23,6 +23,7 @@ package net.habraun.kong.ui
 import game.Ball
 
 import java.awt.Color
+import java.awt.geom.AffineTransform
 import java.awt.geom.Ellipse2D
 
 import edu.umd.cs.piccolo.nodes.PPath
@@ -33,6 +34,14 @@ class BallView( config: Configuration, val ball: Ball ) extends PPath( BallView.
 
 	setPaint( Color.RED )
 	setStroke( config.defaultStroke )
+
+
+
+	def update {
+		val x = ball.position.x - Ball.radius
+		val y = ball.position.y - Ball.radius
+		setTransform( AffineTransform.getTranslateInstance( x, y ) )
+	}
 }
 
 
