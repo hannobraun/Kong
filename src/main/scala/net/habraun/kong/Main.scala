@@ -84,18 +84,16 @@ object Main {
 		val canvas = uiSetup.createCanvas( frame )
 		val paddleViews = paddles.map( new PaddleView( _ ) )
 		val ballView = new BallView( ball )
+		val scoreView = new Score( screenSizeX / 2, screenSizeY / 2 )
 
 		// Add views to the canvas.
 		paddleViews.foreach( canvas.getLayer.addChild( _ ) )
 		canvas.getLayer.addChild( ballView )
+		canvas.getLayer.addChild( scoreView.node )
 
 		// Set up the input handling
 		val inputSetup = new InputSetup
-		val keyHandler = inputSetup.createKeyHandler( canvas )
-
-		// Initialize score
-		val score = new Score(screenSizeX / 2, screenSizeY / 2)
-		canvas.getLayer.addChild(score.node)
+		val keyHandler = inputSetup.createKeyHandler( canvas )		
 		
 		frame.setVisible(true)
 		canvas.requestFocusInWindow
@@ -120,11 +118,11 @@ object Main {
 			// Check if the ball left the field and needs to be placed in the middle again
 			val  ballX = ball.position.x
 			if (ballX > screenSizeX) {
-				score.increaseScore1
+				scoreView.increaseScore1
 				ball.init
 			}
 			if (ballX < 0) {
-				score.increaseScore2
+				scoreView.increaseScore2
 				ball.init
 			}
 
@@ -143,7 +141,7 @@ object Main {
 				val y = position.y - Ball.radius
 				ballView.setTransform(AffineTransform.getTranslateInstance(x, y))
 
-				score.update
+				scoreView.update
 			} )
 
 			val delta = System.currentTimeMillis - timeBefore
