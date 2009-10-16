@@ -23,6 +23,7 @@ package net.habraun.kong.ui
 import game.Paddle
 
 import java.awt.Color
+import java.awt.geom.AffineTransform
 import java.awt.geom.Ellipse2D
 
 import edu.umd.cs.piccolo.nodes.PPath
@@ -34,6 +35,14 @@ class PaddleView( config: Configuration, val paddle: Paddle ) extends PPath( Pad
 
 	setPaint( Color.RED )
 	setStroke( config.defaultStroke )
+
+
+
+	def update {
+		val x = paddle.position.x - Paddle.radius
+		val y = paddle.position.y - Paddle.radius
+		setTransform( AffineTransform.getTranslateInstance( x, y ) )
+	}
 }
 
 

@@ -34,11 +34,7 @@ class Renderer extends Function3[ List[ PaddleView ], BallView, ScoreView, Unit 
 		// Display game state
 		updateSG( () => {
 			for ( paddleView <- paddleViews ) {
-				val position = paddleView.paddle.position
-				val x = position.x - Paddle.radius
-				val y = position.y - Paddle.radius
-
-				paddleView.setTransform (AffineTransform.getTranslateInstance( x, y ) )
+				paddleView.update
 			}
 
 			val position = ballView.ball.position
