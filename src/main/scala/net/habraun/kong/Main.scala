@@ -20,7 +20,9 @@ package net.habraun.kong
 
 
 
+import game.Ball
 import game.GameSetup
+import game.Paddle
 import input.DownKey
 import input.InputSetup
 import input.PlayerLeft
