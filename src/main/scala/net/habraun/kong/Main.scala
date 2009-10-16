@@ -20,13 +20,14 @@ package net.habraun.kong
 
 
 
+import util.PiccoUtil.updateSG
+
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.event.KeyEvent
 import java.awt.geom.AffineTransform
 import java.awt.geom.Ellipse2D
 import javax.swing.JFrame
-import javax.swing.SwingUtilities
 
 import edu.umd.cs.piccolo.PCanvas
 import edu.umd.cs.piccolo.nodes.PPath
@@ -174,7 +175,7 @@ object Main {
 			}
 
 			// Display game state
-			SwingUtilities.invokeLater(new Runnable { def run {
+			updateSG( () => {
 				for (i <- 0 until paddles.length) {
 					val position = paddles( i ).position
 					val x = position.x - Paddle.radius
@@ -189,7 +190,7 @@ object Main {
 				ballNode.setTransform(AffineTransform.getTranslateInstance(x, y))
 
 				score.update
-			}})
+			} )
 
 			val delta = System.currentTimeMillis - timeBefore
 			val missing = (timeStep * 1000).toLong - delta
