@@ -67,83 +67,53 @@ object Main {
 
 
 	def main(args: Array[String]) {
-		// Set up game.
-		val gameSetup = new GameSetup
-		val paddles = gameSetup.createPaddles
-		val ball = gameSetup.createBall
-		val borders = gameSetup.createBorders
-
-		// Initialize world for physics simulation and add all bodies
-		val world = new World[Body]
-		paddles.foreach( world.add( _ ) )
-		world.add( ball )
-		borders.foreach( world.add( _ ) )
-
-		// Set up the UI.
-		val uiSetup = new UISetup
-		val frame = uiSetup.createFrame
-		val canvas = uiSetup.createCanvas( frame )
-		val paddleViews = paddles.map( new PaddleView( _ ) )
-		val ballView = new BallView( ball )
-		val scoreView = new Score( screenSizeX / 2, screenSizeY / 2 )
-
-		// Add views to the canvas.
-		paddleViews.foreach( canvas.getLayer.addChild( _ ) )
-		canvas.getLayer.addChild( ballView )
-		canvas.getLayer.addChild( scoreView.node )
-
-		// Set up the input handling
-		val inputSetup = new InputSetup
-		val keyHandler = inputSetup.createKeyHandler( canvas )		
-
-		// Make UI visible.
-		frame.setVisible( true )
-		canvas.requestFocusInWindow
+		// Setup
+		val setup = new Setup
 
 		// Game loop
 		while (true) {
 			val timeBefore = System.currentTimeMillis
 
 			// Process input
-			paddles.foreach((paddle) => {
-				if (keyHandler.isPressed(paddle.getPlayer, UpKey))
+			setup.paddles.foreach((paddle) => {
+				if (setup.keyHandler.isPressed(paddle.getPlayer, UpKey))
 					paddle.movementUp
-				else if (keyHandler.isPressed(paddle.getPlayer, DownKey))
+				else if (setup.keyHandler.isPressed(paddle.getPlayer, DownKey))
 					paddle.movementDown
 				else
 					paddle.movementStop
 			})
 
 			// Step the physics simulation
-			world.step(timeStep)
+			setup.world.step(timeStep)
 
 			// Check if the ball left the field and needs to be placed in the middle again
-			val  ballX = ball.position.x
+			val  ballX = setup.ball.position.x
 			if (ballX > screenSizeX) {
-				scoreView.increaseScore1
-				ball.init
+				setup.scoreView.increaseScore1
+				setup.ball.init
 			}
 			if (ballX < 0) {
-				scoreView.increaseScore2
-				ball.init
+				setup.scoreView.increaseScore2
+				setup.ball.init
 			}
 
 			// Display game state
 			updateSG( () => {
-				for (i <- 0 until paddles.length) {
-					val position = paddles( i ).position
+				for (i <- 0 until setup.paddles.length) {
+					val position = setup.paddles( i ).position
 					val x = position.x - Paddle.radius
 					val y = position.y - Paddle.radius
 
-					paddleViews(i).setTransform(AffineTransform.getTranslateInstance(x, y))
+					setup.paddleViews(i).setTransform(AffineTransform.getTranslateInstance(x, y))
 				}
 
-				val position = ball.position
+				val position = setup.ball.position
 				val x = position.x - Ball.radius
 				val y = position.y - Ball.radius
-				ballView.setTransform(AffineTransform.getTranslateInstance(x, y))
+				setup.ballView.setTransform(AffineTransform.getTranslateInstance(x, y))
 
-				scoreView.update
+				setup.scoreView.update
 			} )
 
 			val delta = System.currentTimeMillis - timeBefore
