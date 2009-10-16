@@ -20,6 +20,11 @@ package net.habraun.kong
 
 
 
+import input.DownKey
+import input.InputSetup
+import input.PlayerLeft
+import input.PlayerRight
+import input.UpKey
 import ui.UISetup
 import util.PiccoUtil.updateSG
 
@@ -62,18 +67,9 @@ object Main {
 		val frame = uiSetup.createFrame
 		val canvas = uiSetup.createCanvas( frame )
 
-		// Configure the input handler
-		object PlayerLeft extends Player
-		object PlayerRight extends Player
-		object UpKey extends Key
-		object DownKey extends Key
-		val keyMap = (new KeyMap)
-				.addMapping(PlayerLeft, UpKey, KeyEvent.VK_W)
-				.addMapping(PlayerLeft, DownKey, KeyEvent.VK_S)
-				.addMapping(PlayerRight, UpKey, KeyEvent.VK_UP)
-				.addMapping(PlayerRight, DownKey, KeyEvent.VK_DOWN)
-		val keyHandler = new KeyHandler(keyMap)
-		canvas.getRoot.getDefaultInputManager.setKeyboardFocus(keyHandler.handler)
+		// Set up the input handling
+		val inputSetup = new InputSetup
+		val keyHandler = inputSetup.createKeyHandler( canvas )
 
 		// Initialize paddles
 		val paddle1 = new Paddle(PlayerLeft, border + Paddle.radius, screenSizeY / 2)
