@@ -20,14 +20,20 @@ package net.habraun.kong
 
 
 
-import java.awt._
-import java.awt.event._
-import java.awt.geom._
-import javax.swing._
+import java.awt.BasicStroke
+import java.awt.Color
+import java.awt.event.KeyEvent
+import java.awt.geom.AffineTransform
+import java.awt.geom.Ellipse2D
+import javax.swing.JFrame
+import javax.swing.SwingUtilities
 
-import edu.umd.cs.piccolo._
-import edu.umd.cs.piccolo.nodes._
-import net.habraun.piccoinput._
+import edu.umd.cs.piccolo.PCanvas
+import edu.umd.cs.piccolo.nodes.PPath
+import net.habraun.piccoinput.Key
+import net.habraun.piccoinput.KeyHandler
+import net.habraun.piccoinput.KeyMap
+import net.habraun.piccoinput.Player
 import net.habraun.sd.World
 import net.habraun.sd.collision.shape.LineSegment
 import net.habraun.sd.core.Body

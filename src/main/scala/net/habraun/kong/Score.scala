@@ -20,9 +20,9 @@ package net.habraun.kong
 
 
 
-import java.awt._
+import java.awt.Color
 
-import edu.umd.cs.piccolo.nodes._
+import edu.umd.cs.piccolo.nodes.PText
 
 
 

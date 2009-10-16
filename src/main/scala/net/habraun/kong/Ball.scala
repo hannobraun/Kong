@@ -20,9 +20,6 @@ package net.habraun.kong
 
 
 
-import java.util._
-
-
 import net.habraun.sd.collision.shape.Circle
 import net.habraun.sd.core.Body
 import net.habraun.sd.dynamics.VelocityConstraint

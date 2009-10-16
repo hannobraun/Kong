@@ -20,7 +20,7 @@ package net.habraun.kong
 
 
 
-import net.habraun.piccoinput._
+import net.habraun.piccoinput.Player
 import net.habraun.sd.collision.shape.Circle
 import net.habraun.sd.core.Body
 import net.habraun.sd.dynamics.PositionConstraint
