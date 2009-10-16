@@ -20,13 +20,15 @@ package net.habraun.kong.ui
 
 
 
+import game.Score
+
 import java.awt.Color
 
 import edu.umd.cs.piccolo.nodes.PText
 
 
 
-class Score(centerX: Int, centerY: Int) {
+class ScoreView(score: Score, centerX: Int, centerY: Int) {
 
 	val node = new PText(":")
 	private val scoreNode1 = new PText("0")
@@ -39,41 +41,30 @@ class Score(centerX: Int, centerY: Int) {
 	scoreNode2.setConstrainHeightToTextHeight(true)
 	node.addChild(scoreNode1)
 	node.addChild(scoreNode2)
-	node.setTextPaint(Score.paint)
-	scoreNode1.setTextPaint(Score.paint)
-	scoreNode2.setTextPaint(Score.paint)
+	node.setTextPaint( ScoreView.paint )
+	scoreNode1.setTextPaint( ScoreView.paint )
+	scoreNode2.setTextPaint( ScoreView.paint )
 	node.setTransparency(0.2f)
 	node.setScale(15)
 	node.setOffset(centerX - (node.getWidth * node.getScale / 2),
 			centerY - (node.getHeight * node.getScale / 2))
 	scoreNode1.setOffset(-scoreNode1.getWidth /*- scoreBorder*/, 0)
-	scoreNode2.setOffset(Score.border, 0)
-
-	private var score1 = 0
-	private var score2 = 0
-
-
-
-	def getScore1 = score1
-	def getScore2 = score2
-
-	def increaseScore1 = score1 += 1
-	def increaseScore2 = score2 += 1
+	scoreNode2.setOffset( ScoreView.border, 0 )
 
 
 
 	def update {
-		scoreNode1.setText(score1.toString)
-		scoreNode2.setText(score2.toString)
+		scoreNode1.setText( score.score1.toString )
+		scoreNode2.setText( score.score2.toString )
 
 		scoreNode1.setOffset(-scoreNode1.getWidth, 0)
-		scoreNode2.setOffset(Score.border, 0)
+		scoreNode2.setOffset( ScoreView.border, 0 )
 	}
 }
 
 
 
-object Score {
+object ScoreView {
 	val paint = Color.BLACK
 	val border = 3.5
 }

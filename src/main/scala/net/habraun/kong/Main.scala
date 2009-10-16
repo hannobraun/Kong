@@ -23,6 +23,7 @@ package net.habraun.kong
 import game.Ball
 import game.Border
 import game.GameSetup
+import game.GameUpdater
 import game.Paddle
 import input.DownKey
 import input.InputProcessor
@@ -32,7 +33,6 @@ import input.PlayerRight
 import input.UpKey
 import ui.BallView
 import ui.PaddleView
-import ui.Score
 import ui.UISetup
 import util.PiccoUtil.updateSG
 
@@ -73,26 +73,14 @@ object Main {
 
 		// Initialize main loop functions.
 		val processInput = new InputProcessor
+		val updateGame = new GameUpdater
 
 		// Game loop
 		while (true) {
 			val timeBefore = System.currentTimeMillis
 
 			processInput( setup.keyHandler, setup.paddles )
-
-			// Step the physics simulation
-			setup.world.step(timeStep)
-
-			// Check if the ball left the field and needs to be placed in the middle again
-			val  ballX = setup.ball.position.x
-			if (ballX > screenSizeX) {
-				setup.scoreView.increaseScore1
-				setup.ball.init
-			}
-			if (ballX < 0) {
-				setup.scoreView.increaseScore2
-				setup.ball.init
-			}
+			updateGame( timeStep, setup.world, setup.ball, setup.score )
 
 			// Display game state
 			updateSG( () => {

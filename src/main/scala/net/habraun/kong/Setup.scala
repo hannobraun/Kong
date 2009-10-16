@@ -21,10 +21,11 @@ package net.habraun.kong
 
 
 import game.GameSetup
+import game.Score
 import input.InputSetup
 import ui.BallView
 import ui.PaddleView
-import ui.Score
+import ui.ScoreView
 import ui.UISetup
 
 import net.habraun.sd.World
@@ -39,6 +40,7 @@ class Setup {
 	val paddles = gameSetup.createPaddles
 	val ball = gameSetup.createBall
 	val borders = gameSetup.createBorders
+	val score = new Score
 
 	// Initialize world for physics simulation and add all bodies
 	val world = new World[Body]
@@ -52,7 +54,7 @@ class Setup {
 	val canvas = uiSetup.createCanvas( frame )
 	val paddleViews = paddles.map( new PaddleView( _ ) )
 	val ballView = new BallView( ball )
-	val scoreView = new Score( Main.screenSizeX / 2, Main.screenSizeY / 2 )
+	val scoreView = new ScoreView( score, Main.screenSizeX / 2, Main.screenSizeY / 2 )
 
 	// Add views to the canvas.
 	paddleViews.foreach( canvas.getLayer.addChild( _ ) )
