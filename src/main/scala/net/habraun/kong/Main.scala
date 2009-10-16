@@ -33,8 +33,8 @@ import input.PlayerRight
 import input.UpKey
 import ui.BallView
 import ui.PaddleView
+import ui.Renderer
 import ui.UISetup
-import util.PiccoUtil.updateSG
 
 import java.awt.BasicStroke
 import java.awt.Color
@@ -74,6 +74,7 @@ object Main {
 		// Initialize main loop functions.
 		val processInput = new InputProcessor
 		val updateGame = new GameUpdater
+		val render = new Renderer
 
 		// Game loop
 		while (true) {
@@ -81,24 +82,7 @@ object Main {
 
 			processInput( setup.keyHandler, setup.paddles )
 			updateGame( timeStep, setup.world, setup.ball, setup.score )
-
-			// Display game state
-			updateSG( () => {
-				for (i <- 0 until setup.paddles.length) {
-					val position = setup.paddles( i ).position
-					val x = position.x - Paddle.radius
-					val y = position.y - Paddle.radius
-
-					setup.paddleViews(i).setTransform(AffineTransform.getTranslateInstance(x, y))
-				}
-
-				val position = setup.ball.position
-				val x = position.x - Ball.radius
-				val y = position.y - Ball.radius
-				setup.ballView.setTransform(AffineTransform.getTranslateInstance(x, y))
-
-				setup.scoreView.update
-			} )
+			render( setup.paddleViews, setup.ballView, setup.scoreView )
 
 			val delta = System.currentTimeMillis - timeBefore
 			val missing = (timeStep * 1000).toLong - delta

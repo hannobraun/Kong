@@ -29,7 +29,7 @@ import edu.umd.cs.piccolo.nodes.PPath
 
 
 
-class PaddleView( paddle: Paddle ) extends PPath( PaddleView.shape ) {
+class PaddleView( val paddle: Paddle ) extends PPath( PaddleView.shape ) {
 
 
 	setPaint( Color.RED )

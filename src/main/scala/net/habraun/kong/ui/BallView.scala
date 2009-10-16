@@ -29,7 +29,7 @@ import edu.umd.cs.piccolo.nodes.PPath
 
 
 
-class BallView( ball: Ball ) extends PPath( BallView.shape ) {
+class BallView( val ball: Ball ) extends PPath( BallView.shape ) {
 
 	setPaint( Color.RED )
 	setStroke( Main.defaultStroke )
