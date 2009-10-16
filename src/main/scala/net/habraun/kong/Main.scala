@@ -20,6 +20,7 @@ package net.habraun.kong
 
 
 
+import ui.UISetup
 import util.PiccoUtil.updateSG
 
 import java.awt.BasicStroke
@@ -44,39 +45,22 @@ import net.habraun.sd.math.Vec2D
 
 object Main {
 
-	val timeStep = 1.0 / 50.0
-
 	val screenSizeX = 800
 	val screenSizeY = 600
 
-	val border = 20
+	val defaultStroke = new BasicStroke( 0 )
 
-	val defaultStroke = new BasicStroke(0)
+	val timeStep = 1.0 / 50.0
+
+	val border = 20
 
 
 
 	def main(args: Array[String]) {
-		// Configure the main window.
-		val frame = new JFrame( "Kong 0.4" )
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-		frame.setSize(screenSizeX + 12, screenSizeY + 35)
-
-		// Configure the canvas where the scene graph is painted on.
-		val canvas = new PCanvas
-		canvas.removeInputEventListener(canvas.getZoomEventHandler)
-		canvas.removeInputEventListener(canvas.getPanEventHandler)
-		frame.add(canvas)
-
-		// Configure the background color.
-		val background = PPath.createRectangle(0, 0, screenSizeX, screenSizeY)
-		background.setPaint(Color.ORANGE)
-		canvas.getLayer.addChild(background)
-
-		// Configure the middle line.
-		val middleLine = PPath.createRectangle(screenSizeX / 2 - 1, 0, 2, screenSizeY)
-		middleLine.setPaint(Color.RED)
-		middleLine.setStroke(defaultStroke)
-		canvas.getLayer.addChild(middleLine)
+		// Set up the UI.
+		val uiSetup = new UISetup
+		val frame = uiSetup.createFrame
+		val canvas = uiSetup.createCanvas( frame )
 
 		// Configure the input handler
 		object PlayerLeft extends Player
