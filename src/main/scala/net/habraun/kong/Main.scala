@@ -77,7 +77,7 @@ object Main {
 
 			processInput( setup.keyHandler, setup.paddles )
 			updateGame( config.dt, setup.world, setup.ball, setup.score )
-			render( setup.paddleViews, setup.ballView, setup.scoreView )
+			render( setup.views )
 
 			val delta = System.currentTimeMillis - timeBefore
 			val missing = ( config.dt * 1000 ).toLong - delta

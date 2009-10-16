@@ -50,14 +50,16 @@ class Setup( config: Configuration, gameSetup: GameSetup, uiSetup: UISetup, inpu
 	// Set up the UI.
 	val frame = uiSetup.createFrame
 	val canvas = uiSetup.createCanvas( frame )
-	val paddleViews = paddles.map( new PaddleView( config, _ ) )
-	val ballView = new BallView( config, ball )
-	val scoreView = new ScoreView( score, config.screenSizeX / 2, config.screenSizeY / 2 )
+	val views = {
+		val paddleViews = paddles.map( new PaddleView( config, _ ) )
+		val ballView = new BallView( config, ball )
+		val scoreView = new ScoreView( score, config.screenSizeX / 2, config.screenSizeY / 2 )
+
+		paddleViews:::List( ballView, scoreView )
+	}
 
 	// Add views to the canvas.
-	paddleViews.foreach( canvas.getLayer.addChild( _ ) )
-	canvas.getLayer.addChild( ballView )
-	canvas.getLayer.addChild( scoreView.node )
+	views.foreach( canvas.getLayer.addChild( _ ) )
 
 	// Set up the input handling
 	val keyHandler = inputSetup.createKeyHandler( canvas )

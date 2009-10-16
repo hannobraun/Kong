@@ -30,8 +30,8 @@ import edu.umd.cs.piccolo.nodes.PPath
 
 
 
-class PaddleView( config: Configuration, val paddle: Paddle ) extends PPath( PaddleView.shape ) {
-
+class PaddleView( config: Configuration, val paddle: Paddle )
+		extends PPath( PaddleView.shape ) with EntityView{
 
 	setPaint( Color.RED )
 	setStroke( config.defaultStroke )

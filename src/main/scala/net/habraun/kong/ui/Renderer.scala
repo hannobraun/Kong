@@ -28,18 +28,14 @@ import java.awt.geom.AffineTransform
 
 
 
-class Renderer extends Function3[ List[ PaddleView ], BallView, ScoreView, Unit ] {
+class Renderer extends Function1[ List[ EntityView ], Unit ] {
 
-	def apply( paddleViews: List[ PaddleView ], ballView: BallView, scoreView: ScoreView ) {
+	def apply( views: List[ EntityView ] ) {
 		// Display game state
 		updateSG( () => {
-			for ( paddleView <- paddleViews ) {
-				paddleView.update
+			for ( view <- views ) {
+				view.update
 			}
-
-			ballView.update
-
-			scoreView.update
 		} )
 	}
 }
