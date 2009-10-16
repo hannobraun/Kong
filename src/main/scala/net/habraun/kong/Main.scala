@@ -85,13 +85,13 @@ object Main {
 		val paddleViews = paddles.map( new PaddleView( _ ) )
 		val ballView = new BallView( ball )
 
+		// Add views to the canvas.
+		paddleViews.foreach( canvas.getLayer.addChild( _ ) )
+		canvas.getLayer.addChild( ballView )
+
 		// Set up the input handling
 		val inputSetup = new InputSetup
 		val keyHandler = inputSetup.createKeyHandler( canvas )
-
-		// Add views to the canvas.
-		paddleViews.foreach((node) => canvas.getLayer.addChild(node))
-		canvas.getLayer.addChild( ballView )
 
 		// Initialize score
 		val score = new Score(screenSizeX / 2, screenSizeY / 2)
