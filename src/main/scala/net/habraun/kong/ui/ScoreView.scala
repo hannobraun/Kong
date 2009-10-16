@@ -28,27 +28,25 @@ import edu.umd.cs.piccolo.nodes.PText
 
 
 
-class ScoreView(score: Score, centerX: Int, centerY: Int) {
+class ScoreView(score: Score, centerX: Int, centerY: Int) extends PText( ":" ) with EntityView {
 
-	val node = new PText(":")
 	private val scoreNode1 = new PText("0")
 	private val scoreNode2 = new PText("0")
-	node.setConstrainWidthToTextWidth(true)
-	node.setConstrainHeightToTextHeight(true)
+	setConstrainWidthToTextWidth(true)
+	setConstrainHeightToTextHeight(true)
 	scoreNode1.setConstrainWidthToTextWidth(true)
 	scoreNode1.setConstrainHeightToTextHeight(true)
 	scoreNode2.setConstrainWidthToTextWidth(true)
 	scoreNode2.setConstrainHeightToTextHeight(true)
-	node.addChild(scoreNode1)
-	node.addChild(scoreNode2)
-	node.setTextPaint( ScoreView.paint )
+	addChild(scoreNode1)
+	addChild(scoreNode2)
+	setTextPaint( ScoreView.paint )
 	scoreNode1.setTextPaint( ScoreView.paint )
 	scoreNode2.setTextPaint( ScoreView.paint )
-	node.setTransparency(0.2f)
-	node.setScale(15)
-	node.setOffset(centerX - (node.getWidth * node.getScale / 2),
-			centerY - (node.getHeight * node.getScale / 2))
-	scoreNode1.setOffset(-scoreNode1.getWidth /*- scoreBorder*/, 0)
+	setTransparency(0.2f)
+	setScale(15)
+	setOffset(centerX - (getWidth * getScale / 2), centerY - (getHeight * getScale / 2))
+	scoreNode1.setOffset(-scoreNode1.getWidth, 0)
 	scoreNode2.setOffset( ScoreView.border, 0 )
 
 
