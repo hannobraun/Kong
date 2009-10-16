@@ -141,7 +141,7 @@ object Main {
 				val position = ball.position
 				val x = position.x - Ball.radius
 				val y = position.y - Ball.radius
-				ballNode.setTransform(AffineTransform.getTranslateInstance(x, y))
+				ballView.setTransform(AffineTransform.getTranslateInstance(x, y))
 
 				score.update
 			} )
