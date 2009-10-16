@@ -24,7 +24,7 @@ import net.habraun.sd.World
 
 
 
-class GameUpdater extends Function4[ Double, World[ _ ], Ball, Score, Unit ] {
+class GameUpdater( config: Configuration ) extends Function4[ Double, World[ _ ], Ball, Score, Unit ] {
 
 	def apply( dt: Double, world: World[ _ ], ball: Ball, score: Score ) {
 		// Step the physics simulation
@@ -32,7 +32,7 @@ class GameUpdater extends Function4[ Double, World[ _ ], Ball, Score, Unit ] {
 
 		// Check if the ball left the field and needs to be placed in the middle again
 		val  ballX = ball.position.x
-		if ( ballX > Main.screenSizeX ) {
+		if ( ballX > config.screenSizeX ) {
 			score.increaseScore1
 			ball.init
 		}

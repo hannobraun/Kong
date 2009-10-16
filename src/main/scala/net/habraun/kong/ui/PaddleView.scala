@@ -29,11 +29,11 @@ import edu.umd.cs.piccolo.nodes.PPath
 
 
 
-class PaddleView( val paddle: Paddle ) extends PPath( PaddleView.shape ) {
+class PaddleView( config: Configuration, val paddle: Paddle ) extends PPath( PaddleView.shape ) {
 
 
 	setPaint( Color.RED )
-	setStroke( Main.defaultStroke )
+	setStroke( config.defaultStroke )
 }
 
 

@@ -29,13 +29,13 @@ import edu.umd.cs.piccolo.nodes.PPath
 
 
 
-class UISetup {
+class UISetup( config: Configuration ) {
 
 	def createFrame = {
 		// Configure the main window.
 		val frame = new JFrame( "Kong 0.4" )
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE )
-		frame.setSize( Main.screenSizeX + 12, Main.screenSizeY + 35 )
+		frame.setSize( config.screenSizeX + 12, config.screenSizeY + 35 )
 
 		frame
 	}
@@ -50,14 +50,14 @@ class UISetup {
 		frame.add( canvas )
 
 		// Configure the background color.
-		val background = PPath.createRectangle( 0, 0, Main.screenSizeX, Main.screenSizeY )
+		val background = PPath.createRectangle( 0, 0, config.screenSizeX, config.screenSizeY )
 		background.setPaint( Color.ORANGE )
 		canvas.getLayer.addChild( background )
 
 		// Configure the middle line.
-		val middleLine = PPath.createRectangle( Main.screenSizeX / 2 - 1, 0, 2, Main.screenSizeY )
+		val middleLine = PPath.createRectangle( config.screenSizeX / 2 - 1, 0, 2, config.screenSizeY )
 		middleLine.setPaint( Color.RED )
-		middleLine.setStroke( Main.defaultStroke )
+		middleLine.setStroke( config.defaultStroke )
 		canvas.getLayer.addChild( middleLine )
 
 		canvas

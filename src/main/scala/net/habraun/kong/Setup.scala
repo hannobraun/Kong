@@ -33,7 +33,7 @@ import net.habraun.sd.core.Body
 
 
 
-class Setup( gameSetup: GameSetup, uiSetup: UISetup, inputSetup: InputSetup ) {
+class Setup( config: Configuration, gameSetup: GameSetup, uiSetup: UISetup, inputSetup: InputSetup ) {
 
 	// Set up game.
 	val paddles = gameSetup.createPaddles
@@ -50,9 +50,9 @@ class Setup( gameSetup: GameSetup, uiSetup: UISetup, inputSetup: InputSetup ) {
 	// Set up the UI.
 	val frame = uiSetup.createFrame
 	val canvas = uiSetup.createCanvas( frame )
-	val paddleViews = paddles.map( new PaddleView( _ ) )
-	val ballView = new BallView( ball )
-	val scoreView = new ScoreView( score, Main.screenSizeX / 2, Main.screenSizeY / 2 )
+	val paddleViews = paddles.map( new PaddleView( config, _ ) )
+	val ballView = new BallView( config, ball )
+	val scoreView = new ScoreView( score, config.screenSizeX / 2, config.screenSizeY / 2 )
 
 	// Add views to the canvas.
 	paddleViews.foreach( canvas.getLayer.addChild( _ ) )

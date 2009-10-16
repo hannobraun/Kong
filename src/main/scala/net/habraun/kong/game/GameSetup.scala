@@ -27,7 +27,7 @@ import net.habraun.sd.math.Vec2D
 
 
 
-class GameSetup {
+class GameSetup( config: Configuration ) {
 
 	val border = 20
 
@@ -35,9 +35,9 @@ class GameSetup {
 
 	def createPaddles = {
 		// Initialize paddles
-		val paddle1 = new Paddle( PlayerLeft, border + Paddle.radius, Main.screenSizeY / 2 )
-		val paddle2 = new Paddle( PlayerRight, Main.screenSizeX - border - Paddle.radius,
-				Main.screenSizeY / 2)
+		val paddle1 = new Paddle( config, PlayerLeft, border + Paddle.radius, config.screenSizeY / 2 )
+		val paddle2 = new Paddle( config, PlayerRight, config.screenSizeX - border - Paddle.radius,
+				config.screenSizeY / 2)
 
 		List( paddle1, paddle2 )
 	}
@@ -46,7 +46,7 @@ class GameSetup {
 
 	def createBall = {
 		// Initialize the ball
-		val ball = new Ball( Main.screenSizeX / 2, Main.screenSizeY / 2 )
+		val ball = new Ball( config.screenSizeX / 2, config.screenSizeY / 2 )
 		ball.init
 
 		ball
@@ -56,8 +56,8 @@ class GameSetup {
 
 	def createBorders = {
 		// Initialize the borders
-		val topBorder = new Border( Vec2D( 0, 0 ) )
-		val bottomBorder = new Border( Vec2D( 0, Main.screenSizeY ) )
+		val topBorder = new Border( config, Vec2D( 0, 0 ) )
+		val bottomBorder = new Border( config, Vec2D( 0, config.screenSizeY ) )
 
 		List( topBorder, bottomBorder )
 	}

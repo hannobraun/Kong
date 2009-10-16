@@ -58,22 +58,17 @@ import net.habraun.sd.math.Vec2D
 
 object Main {
 
-	val screenSizeX = 800
-	val screenSizeY = 600
-
-	val defaultStroke = new BasicStroke( 0 )
-
-	val timeStep = 1.0 / 50.0
+	val config = DefaultConfiguration
 
 
 
 	def main(args: Array[String]) {
 		// Setup
-		val setup = new Setup( new GameSetup, new UISetup, new InputSetup )
+		val setup = new Setup( config, new GameSetup( config ), new UISetup( config ), new InputSetup )
 
 		// Initialize main loop functions.
 		val processInput = new InputProcessor
-		val updateGame = new GameUpdater
+		val updateGame = new GameUpdater( config )
 		val render = new Renderer
 
 		// Game loop
@@ -81,13 +76,13 @@ object Main {
 			val timeBefore = System.currentTimeMillis
 
 			processInput( setup.keyHandler, setup.paddles )
-			updateGame( timeStep, setup.world, setup.ball, setup.score )
+			updateGame( config.dt, setup.world, setup.ball, setup.score )
 			render( setup.paddleViews, setup.ballView, setup.scoreView )
 
 			val delta = System.currentTimeMillis - timeBefore
-			val missing = (timeStep * 1000).toLong - delta
-			if (missing > 0) {
-				Thread.sleep(missing)
+			val missing = ( config.dt * 1000 ).toLong - delta
+			if ( missing > 0 ) {
+				Thread.sleep( missing )
 			}
 		}
 	}	

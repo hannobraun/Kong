@@ -16,20 +16,32 @@
 
 
 
-package net.habraun.kong.game
+package net.habraun.kong
 
 
 
-import net.habraun.sd.collision.shape.LineSegment
-import net.habraun.sd.core.Body
-import net.habraun.sd.math.Vec2D
+import java.awt.Stroke
+import java.awt.BasicStroke
 
 
 
-class Border( config: Configuration, thePosition: Vec2D ) extends Body with LineSegment {
+trait Configuration {
+	def screenSizeX: Int
+	def screenSizeY: Int
 
-	position = thePosition
-	mass = Double.PositiveInfinity
-	p = Vec2D( 0, 0 )
-	d = Vec2D( config.screenSizeX, 0 )
+	def defaultStroke: Stroke
+
+	def dt: Double
+}
+
+
+
+object DefaultConfiguration extends Configuration {
+
+	val screenSizeX = 800
+	val screenSizeY = 600
+
+	val defaultStroke = new BasicStroke( 0 )
+
+	val dt = 1.0 / 50.0
 }
