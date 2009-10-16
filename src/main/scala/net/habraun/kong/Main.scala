@@ -29,6 +29,7 @@ import input.InputSetup
 import input.PlayerLeft
 import input.PlayerRight
 import input.UpKey
+import ui.PaddleView
 import ui.UISetup
 import util.PiccoUtil.updateSG
 
@@ -64,15 +65,6 @@ object Main {
 
 
 	def main(args: Array[String]) {
-		// Set up the UI.
-		val uiSetup = new UISetup
-		val frame = uiSetup.createFrame
-		val canvas = uiSetup.createCanvas( frame )
-
-		// Set up the input handling
-		val inputSetup = new InputSetup
-		val keyHandler = inputSetup.createKeyHandler( canvas )
-
 		// Set up game.
 		val gameSetup = new GameSetup
 		val paddles = gameSetup.createPaddles
@@ -85,16 +77,18 @@ object Main {
 		world.add( ball )
 		borders.foreach( world.add( _ ) )
 
-		// Initialize scene graph nodes for paddles
-		val paddleShape = new Ellipse2D.Double(0, 0, Paddle.radius * 2, Paddle.radius * 2)
-		val paddleNodes = paddles.map((paddle) => {
-			val node = new PPath(paddleShape)
-			node.setPaint(Color.RED)
-			node.setStroke(defaultStroke)
+		// Set up the UI.
+		val uiSetup = new UISetup
+		val frame = uiSetup.createFrame
+		val canvas = uiSetup.createCanvas( frame )
+		val paddleViews = paddles.map( new PaddleView( _ ) )
 
-			node
-		})
-		paddleNodes.foreach((node) => canvas.getLayer.addChild(node))
+		// Set up the input handling
+		val inputSetup = new InputSetup
+		val keyHandler = inputSetup.createKeyHandler( canvas )
+
+		// Add views to the canvas.
+		paddleViews.foreach((node) => canvas.getLayer.addChild(node))
 
 		// Initialize the scene graph node for the ball
 		val ballShape = new Ellipse2D.Double(0, 0, Ball.radius * 2, Ball.radius * 2)
@@ -145,7 +139,7 @@ object Main {
 					val x = position.x - Paddle.radius
 					val y = position.y - Paddle.radius
 
-					paddleNodes(i).setTransform(AffineTransform.getTranslateInstance(x, y))
+					paddleViews(i).setTransform(AffineTransform.getTranslateInstance(x, y))
 				}
 
 				val position = ball.position
