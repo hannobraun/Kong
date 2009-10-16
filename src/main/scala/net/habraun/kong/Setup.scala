@@ -33,10 +33,9 @@ import net.habraun.sd.core.Body
 
 
 
-class Setup {
+class Setup( gameSetup: GameSetup, uiSetup: UISetup, inputSetup: InputSetup ) {
 
 	// Set up game.
-	val gameSetup = new GameSetup
 	val paddles = gameSetup.createPaddles
 	val ball = gameSetup.createBall
 	val borders = gameSetup.createBorders
@@ -49,7 +48,6 @@ class Setup {
 	borders.foreach( world.add( _ ) )
 
 	// Set up the UI.
-	val uiSetup = new UISetup
 	val frame = uiSetup.createFrame
 	val canvas = uiSetup.createCanvas( frame )
 	val paddleViews = paddles.map( new PaddleView( _ ) )
@@ -62,7 +60,6 @@ class Setup {
 	canvas.getLayer.addChild( scoreView.node )
 
 	// Set up the input handling
-	val inputSetup = new InputSetup
 	val keyHandler = inputSetup.createKeyHandler( canvas )
 
 	// Make UI visible.

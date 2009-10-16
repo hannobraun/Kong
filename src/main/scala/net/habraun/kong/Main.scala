@@ -69,7 +69,7 @@ object Main {
 
 	def main(args: Array[String]) {
 		// Setup
-		val setup = new Setup
+		val setup = new Setup( new GameSetup, new UISetup, new InputSetup )
 
 		// Initialize main loop functions.
 		val processInput = new InputProcessor
