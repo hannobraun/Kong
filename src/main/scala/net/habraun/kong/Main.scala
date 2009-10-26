@@ -62,7 +62,7 @@ object Main {
 
 
 
-	def main(args: Array[String]) {
+	def main( args: Array[String] ) {
 		// Setup
 		val setup = new Setup( config, new GameSetup( config ), new UISetup( config ), new InputSetup )
 
