@@ -70,20 +70,26 @@ object Main {
 		val processInput = new InputProcessor
 		val updateGame = new GameUpdater( config )
 		val render = new Renderer
+		
+		val nanoDelta = ( config.dt * 1000000000 ).asInstanceOf[ Long ]
+
+		var accumulator: Long = 0
+		var lastUpdate = System.nanoTime
 
 		// Game loop
-		while (true) {
-			val timeBefore = System.currentTimeMillis
+		while ( true ) {
+			while ( accumulator >= nanoDelta ) {
+				processInput( setup.keyHandler, setup.paddles )
+				updateGame( config.dt, setup.world, setup.ball, setup.score )
+				
+				accumulator -= nanoDelta
+			}
 
-			processInput( setup.keyHandler, setup.paddles )
-			updateGame( config.dt, setup.world, setup.ball, setup.score )
 			render( setup.views )
 
-			val delta = System.currentTimeMillis - timeBefore
-			val missing = ( config.dt * 1000 ).toLong - delta
-			if ( missing > 0 ) {
-				Thread.sleep( missing )
-			}
+			val currentTime = System.nanoTime
+			accumulator += currentTime - lastUpdate
+			lastUpdate = currentTime
 		}
 	}	
 }
