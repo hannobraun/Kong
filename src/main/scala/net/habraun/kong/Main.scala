@@ -20,39 +20,12 @@ package net.habraun.kong
 
 
 
-import game.Ball
-import game.Border
 import game.GameSetup
 import game.GameUpdater
-import game.Paddle
-import input.DownKey
 import input.InputProcessor
 import input.InputSetup
-import input.PlayerLeft
-import input.PlayerRight
-import input.UpKey
-import ui.BallView
-import ui.PaddleView
 import ui.Renderer
 import ui.UISetup
-
-import java.awt.BasicStroke
-import java.awt.Color
-import java.awt.event.KeyEvent
-import java.awt.geom.AffineTransform
-import java.awt.geom.Ellipse2D
-import javax.swing.JFrame
-
-import edu.umd.cs.piccolo.PCanvas
-import edu.umd.cs.piccolo.nodes.PPath
-import net.habraun.piccoinput.Key
-import net.habraun.piccoinput.KeyHandler
-import net.habraun.piccoinput.KeyMap
-import net.habraun.piccoinput.Player
-import net.habraun.sd.World
-import net.habraun.sd.collision.shape.LineSegment
-import net.habraun.sd.core.Body
-import net.habraun.sd.math.Vec2D
 
 
 
