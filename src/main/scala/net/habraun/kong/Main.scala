@@ -91,5 +91,5 @@ object Main {
 			accumulator += currentTime - lastUpdate
 			lastUpdate = currentTime
 		}
-	}	
+	}
 }
