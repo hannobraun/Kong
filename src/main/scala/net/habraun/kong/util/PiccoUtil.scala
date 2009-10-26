@@ -27,7 +27,7 @@ import javax.swing.SwingUtilities
 object PiccoUtil {
 
 	def updateSG( f: () => Unit ) {
-		SwingUtilities.invokeLater( new Runnable {
+		SwingUtilities.invokeAndWait( new Runnable {
 			def run {
 				f.apply
 			}
