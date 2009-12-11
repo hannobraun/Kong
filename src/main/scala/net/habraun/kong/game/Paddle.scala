@@ -35,6 +35,8 @@ class Paddle( config: Configuration, player: Player, initialX: Float, initialY: 
 	position = Vec2D( initialX, initialY )
 	minX = Some( initialX )
 	maxX = Some( initialX )
+	minY = Some( Paddle.radius )
+	maxY = Some( config.screenSizeY - Paddle.radius )
 
 
 
