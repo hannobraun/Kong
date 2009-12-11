@@ -30,6 +30,5 @@ class Border( config: Configuration, thePosition: Vec2D ) extends Body with Line
 
 	position = thePosition
 	mass = Double.PositiveInfinity
-	p = Vec2D( 0, 0 )
 	d = Vec2D( config.screenSizeX, 0 )
 }
