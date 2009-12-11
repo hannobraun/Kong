@@ -62,7 +62,7 @@ class Paddle( config: Configuration, player: Player, initialX: Float, initialY: 
 
 
 
-	private[this] def setSpeed( nominalSpeed: Double ) {
+	private[ this ] def setSpeed( nominalSpeed: Double ) {
 		velocity = Vec2D( 0, nominalSpeed )
 	}
 }
