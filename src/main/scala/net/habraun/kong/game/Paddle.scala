@@ -33,7 +33,8 @@ class Paddle( config: Configuration, player: Player, initialX: Float, initialY: 
 	mass = Double.PositiveInfinity
 	radius = Paddle.radius
 	position = Vec2D( initialX, initialY )
-	xConstraint = Some( initialX )
+	minX = Some( initialX )
+	maxX = Some( initialX )
 
 
 
