@@ -31,7 +31,7 @@ import net.habraun.sd.math.Vec2D
 class Paddle( config: Configuration, player: Player, initialX: Float, initialY: Float )
 		extends Body with Circle  with PositionConstraint {
 
-	mass = 100
+	mass = Double.PositiveInfinity
 	radius = Paddle.radius
 	position = Vec2D( initialX, initialY )
 	xConstraint = Some( initialX )
@@ -61,10 +61,7 @@ class Paddle( config: Configuration, player: Player, initialX: Float, initialY: 
 
 
 	private[this] def setSpeed( nominalSpeed: Double ) {
-		val speedDifference = Math.abs( nominalSpeed - velocity.y )
-		val undirectedForce = speedDifference / config.dt * mass
-		val force = if ( nominalSpeed > velocity.y ) undirectedForce else -undirectedForce
-		applyForce( new Vec2D( 0, force ) )
+		velocity = Vec2D( 0, nominalSpeed )
 	}
 }
 
