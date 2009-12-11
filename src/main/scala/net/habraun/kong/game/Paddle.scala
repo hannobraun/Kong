@@ -28,8 +28,7 @@ import net.habraun.sd.math.Vec2D
 
 
 
-class Paddle( config: Configuration, player: Player, initialX: Float, initialY: Float )
-		extends Body with Circle  with PositionConstraint {
+class Paddle( config: Configuration, player: Player, initialX: Float, initialY: Float ) extends Body with Circle  with PositionConstraint {
 
 	mass = Double.PositiveInfinity
 	radius = Paddle.radius
