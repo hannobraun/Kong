@@ -30,5 +30,5 @@ class Border( config: Configuration, thePosition: Vector2 ) extends Body with Li
 
 	position = thePosition
 	mass = Double.PositiveInfinity
-	direction = Vector2( config.screenSizeX, 0 )
+	override val direction = Vector2( config.screenSizeX, 0 )
 }
