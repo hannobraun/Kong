@@ -22,13 +22,13 @@ package net.habraun.kong.game
 
 import net.habraun.sd.collision.shape.LineSegment
 import net.habraun.sd.core.Body
-import net.habraun.sd.math.Vec2D
+import net.habraun.sd.math.Vector2
 
 
 
-class Border( config: Configuration, thePosition: Vec2D ) extends Body with LineSegment {
+class Border( config: Configuration, thePosition: Vector2 ) extends Body with LineSegment {
 
 	position = thePosition
 	mass = Double.PositiveInfinity
-	direction = Vec2D( config.screenSizeX, 0 )
+	direction = Vector2( config.screenSizeX, 0 )
 }

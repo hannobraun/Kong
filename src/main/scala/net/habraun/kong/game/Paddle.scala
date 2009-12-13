@@ -24,7 +24,7 @@ import net.habraun.piccoinput.Player
 import net.habraun.sd.collision.shape.Circle
 import net.habraun.sd.core.Body
 import net.habraun.sd.dynamics.PositionConstraint
-import net.habraun.sd.math.Vec2D
+import net.habraun.sd.math.Vector2
 
 
 
@@ -32,7 +32,7 @@ class Paddle( config: Configuration, player: Player, initialX: Float, initialY: 
 
 	mass = Double.PositiveInfinity
 	radius = Paddle.radius
-	position = Vec2D( initialX, initialY )
+	position = Vector2( initialX, initialY )
 	minX = Some( initialX )
 	maxX = Some( initialX )
 	minY = Some( Paddle.radius )
@@ -63,7 +63,7 @@ class Paddle( config: Configuration, player: Player, initialX: Float, initialY: 
 
 
 	private[ this ] def setSpeed( nominalSpeed: Double ) {
-		velocity = Vec2D( 0, nominalSpeed )
+		velocity = Vector2( 0, nominalSpeed )
 	}
 }
 

@@ -23,7 +23,7 @@ package net.habraun.kong.game
 import net.habraun.sd.collision.shape.Circle
 import net.habraun.sd.core.Body
 import net.habraun.sd.dynamics.VelocityConstraint
-import net.habraun.sd.math.Vec2D
+import net.habraun.sd.math.Vector2
 
 
 
@@ -46,8 +46,8 @@ class Ball( startingX: Int, startingY: Int ) extends Body with Circle with Veloc
 		val xVel = xMod * vel(r, 100, 3)
 		val yVel = yMod * vel(r, 0, 2)
 
-		velocity = Vec2D( xVel, yVel )
-		position = Vec2D( startingX, startingY )
+		velocity = Vector2( xVel, yVel )
+		position = Vector2( startingX, startingY )
 	}
 }
 
