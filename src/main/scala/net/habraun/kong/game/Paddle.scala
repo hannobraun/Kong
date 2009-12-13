@@ -28,10 +28,11 @@ import net.habraun.sd.math.Vector2
 
 
 
-class Paddle( config: Configuration, player: Player, initialX: Float, initialY: Float ) extends Body with Circle  with PositionConstraint {
+class Paddle( config: Configuration, player: Player, initialX: Double, initialY: Double )
+		extends Body with Circle  with PositionConstraint {
 
 	mass = Double.PositiveInfinity
-	radius = Paddle.radius
+	override val radius = Paddle.radius
 	position = Vector2( initialX, initialY )
 	minX = Some( initialX )
 	maxX = Some( initialX )
@@ -70,6 +71,6 @@ class Paddle( config: Configuration, player: Player, initialX: Float, initialY: 
 
 
 object Paddle {
-	val radius = 30
+	val radius = 30.0
 	val speed = 500
 }

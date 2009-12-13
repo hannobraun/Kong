@@ -31,7 +31,7 @@ class Ball( startingX: Int, startingY: Int ) extends Body with Circle with Veloc
 	
 	private val r = new Random
 
-	radius = Ball.radius
+	override val radius = Ball.radius
 	mass = Ball.mass
 	maxVelocity = 550
 
@@ -54,6 +54,6 @@ class Ball( startingX: Int, startingY: Int ) extends Body with Circle with Veloc
 
 
 object Ball {
-	val radius = 5
+	val radius = 5.0
 	val mass = 1
 }

@@ -29,7 +29,7 @@ import net.habraun.sd.math.Vector2
 
 class GameSetup( config: Configuration ) {
 
-	val border = 20
+	val border = 20.0
 
 
 
