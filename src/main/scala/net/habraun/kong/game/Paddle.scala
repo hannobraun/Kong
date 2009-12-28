@@ -46,19 +46,19 @@ class Paddle( config: Configuration, player: Player, initialX: Double, initialY:
 
 
 	def movementUp {
-		setSpeed(-Paddle.speed)
+		setSpeed( -Paddle.speed )
 	}
 
 
 
 	def movementDown {
-		setSpeed(Paddle.speed)
+		setSpeed( Paddle.speed )
 	}
 
 
 
 	def movementStop {
-		setSpeed(0)
+		setSpeed( 0 )
 	}
 
 
