@@ -20,6 +20,8 @@ package net.habraun.kong.game
 
 
 
+import scala.util.Random
+
 import net.habraun.sd.collision.shape.Circle
 import net.habraun.sd.core.Body
 import net.habraun.sd.dynamics.VelocityConstraint
