@@ -4,6 +4,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
+
+
 	<groupId>com.hannobraun</groupId>
 	<artifactId>kong</artifactId>
 	<version>0.4-SNAPSHOT</version>
@@ -25,12 +27,16 @@
 		<url>http://github.com/hbraun/Kong</url>
 	</scm>
 
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<scala.version>2.7.3</scala.version>
 	</properties>
+
+
 
 	<repositories>
 		<repository>
@@ -53,6 +59,8 @@
 			<url>http://scala-tools.org/repo-releases</url>
 		</pluginRepository>
 	</pluginRepositories>
+
+
 
 	<dependencies>
 		<!-- Compilation dependencies -->
@@ -80,6 +88,8 @@
 			<version>1.2.1</version>
 		</dependency>
 	</dependencies>
+
+
 
 	<build>
 		<sourceDirectory>src/main/scala</sourceDirectory>
@@ -111,6 +121,8 @@
 		</plugins>
 	</build>
 
+
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -119,4 +131,5 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	
 </project>
