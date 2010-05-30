@@ -20,16 +20,16 @@ package net.habraun.kong
 
 
 
-import game.GameSetup
-import game.Score
-import input.InputSetup
-import ui.BallView
-import ui.PaddleView
-import ui.ScoreView
-import ui.UISetup
+import net.habraun.kong.game.GameSetup
+import net.habraun.kong.game.Score
+import net.habraun.kong.input.InputSetup
+import net.habraun.kong.ui.BallView
+import net.habraun.kong.ui.PaddleView
+import net.habraun.kong.ui.ScoreView
+import net.habraun.kong.ui.UISetup
 
-import net.habraun.sd.World
-import net.habraun.sd.core.Body
+import com.hannobraun.sd.World
+import com.hannobraun.sd.core.Body
 
 
 

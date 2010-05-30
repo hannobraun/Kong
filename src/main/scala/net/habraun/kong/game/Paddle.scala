@@ -20,11 +20,13 @@ package net.habraun.kong.game
 
 
 
-import net.habraun.piccoinput.Player
-import net.habraun.sd.collision.shape.Circle
-import net.habraun.sd.core.Body
-import net.habraun.sd.dynamics.PositionConstraint
-import net.habraun.sd.math.Vector2
+import net.habraun.kong.Configuration
+
+import com.hannobraun.piccoinput.Player
+import com.hannobraun.sd.collision.shape.Circle
+import com.hannobraun.sd.core.Body
+import com.hannobraun.sd.dynamics.PositionConstraint
+import com.hannobraun.sd.math.Vector2
 
 
 

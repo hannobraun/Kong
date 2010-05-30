@@ -20,7 +20,7 @@ package net.habraun.kong.ui
 
 
 
-import game.Score
+import net.habraun.kong.game.Score
 
 import java.awt.Color
 

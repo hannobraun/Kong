@@ -22,10 +22,10 @@ package net.habraun.kong.game
 
 import scala.util.Random
 
-import net.habraun.sd.collision.shape.Circle
-import net.habraun.sd.core.Body
-import net.habraun.sd.dynamics.VelocityConstraint
-import net.habraun.sd.math.Vector2
+import com.hannobraun.sd.collision.shape.Circle
+import com.hannobraun.sd.core.Body
+import com.hannobraun.sd.dynamics.VelocityConstraint
+import com.hannobraun.sd.math.Vector2
 
 
 

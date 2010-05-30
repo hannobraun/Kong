@@ -6,7 +6,14 @@
 
 
 
-	<groupId>com.hannobraun</groupId>
+	<parent>
+		<groupId>com.hannobraun</groupId>
+		<artifactId>hannobraun-parent</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+
+
+
 	<artifactId>kong</artifactId>
 	<version>0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -26,15 +33,6 @@
 	<scm>
 		<url>http://github.com/hbraun/Kong</url>
 	</scm>
-
-
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
-		<scala.version>2.7.3</scala.version>
-	</properties>
 
 
 
@@ -63,22 +61,20 @@
 
 
 	<dependencies>
-		<!-- Compilation dependencies -->
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
+		<!--
+			Basic dependencies like scala-library and Specs are inherited from the parent POM. Additional dependencies can be specified
+			here.
+		-->
 
 		<dependency>
 			<groupId>com.hannobraun</groupId>
-			<artifactId>scalable-dynamics</artifactId>
+			<artifactId>scalable-dynamics_${scala.version}</artifactId>
 			<version>0.3-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
-			<groupId>net.habraun</groupId>
-			<artifactId>piccoinput</artifactId>
+			<groupId>com.hannobraun</groupId>
+			<artifactId>piccoinput_${scala.version}</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 
@@ -92,44 +88,12 @@
 
 
 	<build>
-		<sourceDirectory>src/main/scala</sourceDirectory>
-		<testSourceDirectory>src/test/scala</testSourceDirectory>
-
 		<plugins>
 			<plugin>
 				<groupId>org.scala-tools</groupId>
 				<artifactId>maven-scala-plugin</artifactId>
-
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
-
-				<configuration>
-					<args>
-						<arg>-target:jvm-1.5</arg>
-						<arg>-unchecked</arg>
-						<arg>-deprecation</arg>
-						<arg>-Xcheckinit</arg>
-					</args>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</reporting>
 	
 </project>

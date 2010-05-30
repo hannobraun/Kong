@@ -20,7 +20,8 @@ package net.habraun.kong.ui
 
 
 
-import game.Ball
+import net.habraun.kong.Configuration
+import net.habraun.kong.game.Ball
 
 import java.awt.Color
 import java.awt.geom.AffineTransform

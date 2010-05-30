@@ -20,7 +20,9 @@ package net.habraun.kong.game
 
 
 
-import net.habraun.sd.World
+import net.habraun.kong.Configuration
+
+import com.hannobraun.sd.World
 
 
 

@@ -20,11 +20,7 @@ package net.habraun.kong.ui
 
 
 
-import game.Ball
-import game.Paddle
-import util.PiccoUtil.updateSG
-
-import java.awt.geom.AffineTransform
+import net.habraun.kong.util.PiccoUtil.updateSG
 
 
 

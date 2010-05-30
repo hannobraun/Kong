@@ -20,9 +20,9 @@ package net.habraun.kong.input
 
 
 
-import game.Paddle
+import net.habraun.kong.game.Paddle
 
-import net.habraun.piccoinput.KeyHandler
+import com.hannobraun.piccoinput.KeyHandler
 
 
 

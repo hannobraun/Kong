@@ -20,10 +20,11 @@ package net.habraun.kong.game
 
 
 
-import input.PlayerLeft
-import input.PlayerRight
+import net.habraun.kong.Configuration
+import net.habraun.kong.input.PlayerLeft
+import net.habraun.kong.input.PlayerRight
 
-import net.habraun.sd.math.Vector2
+import com.hannobraun.sd.math.Vector2
 
 
 

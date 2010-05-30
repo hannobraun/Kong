@@ -23,10 +23,10 @@ package net.habraun.kong.input
 import java.awt.event.KeyEvent
 
 import edu.umd.cs.piccolo.PCanvas
-import net.habraun.piccoinput.Key
-import net.habraun.piccoinput.KeyHandler
-import net.habraun.piccoinput.KeyMap
-import net.habraun.piccoinput.Player
+import com.hannobraun.piccoinput.Key
+import com.hannobraun.piccoinput.KeyHandler
+import com.hannobraun.piccoinput.KeyMap
+import com.hannobraun.piccoinput.Player
 
 
 

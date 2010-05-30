@@ -20,9 +20,11 @@ package net.habraun.kong.game
 
 
 
-import net.habraun.sd.collision.shape.LineSegment
-import net.habraun.sd.core.Body
-import net.habraun.sd.math.Vector2
+import net.habraun.kong.Configuration
+
+import com.hannobraun.sd.collision.shape.LineSegment
+import com.hannobraun.sd.core.Body
+import com.hannobraun.sd.math.Vector2
 
 
 

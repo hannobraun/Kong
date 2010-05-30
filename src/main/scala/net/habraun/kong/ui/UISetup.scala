@@ -20,7 +20,8 @@ package net.habraun.kong.ui
 
 
 
-import java.awt.BasicStroke
+import net.habraun.kong.Configuration
+
 import java.awt.Color
 import javax.swing.JFrame
 
