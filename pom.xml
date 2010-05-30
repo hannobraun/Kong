@@ -36,30 +36,6 @@
 
 
 
-	<repositories>
-		<repository>
-			<id>scala-tools.org</id>
-			<name>Scala-Tools Maven2 Repository</name>
-			<url>http://scala-tools.org/repo-releases</url>
-		</repository>
-
-		<repository>
-			<id>apache</id>
-			<name>Default repository from Apache</name>
-			<url>http://ftp.cica.es/mirrors/maven2/</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>scala-tools.org</id>
-			<name>Scala-Tools Maven2 Repository</name>
-			<url>http://scala-tools.org/repo-releases</url>
-		</pluginRepository>
-	</pluginRepositories>
-
-
-
 	<dependencies>
 		<!--
 			Basic dependencies like scala-library and Specs are inherited from the parent POM. Additional dependencies can be specified
