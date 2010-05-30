@@ -63,7 +63,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.habraun</groupId>
+			<groupId>com.hannobraun</groupId>
 			<artifactId>scalable-dynamics</artifactId>
 			<version>0.3-SNAPSHOT</version>
 		</dependency>
