@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.kong.ui
+package com.hannobraun.kong.ui
 
 
 
-import net.habraun.kong.game.Score
+import com.hannobraun.kong.game.Score
 
 import java.awt.Color
 

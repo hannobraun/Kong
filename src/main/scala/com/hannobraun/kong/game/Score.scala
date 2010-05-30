@@ -16,21 +16,24 @@
 
 
 
-package net.habraun.kong.game
+package com.hannobraun.kong.game
 
 
 
-import net.habraun.kong.Configuration
+class Score {
 
-import com.hannobraun.sd.collision.shape.LineSegment
-import com.hannobraun.sd.core.Body
-import com.hannobraun.sd.math.Vector2
-
+	private var _score1 = 0
+	private var _score2 = 0
 
 
-class Border( config: Configuration, thePosition: Vector2 ) extends Body with LineSegment {
 
-	position = thePosition
-	mass = Double.PositiveInfinity
-	override val direction = Vector2( config.screenSizeX, 0 )
+	def score1 = _score1
+
+	def score2 = _score2
+
+
+
+	def increaseScore1 = _score1 += 1
+
+	def increaseScore2 = _score2 += 1
 }

@@ -16,22 +16,31 @@
 
 
 
-package net.habraun.kong.ui
+package com.hannobraun.kong.game
 
 
 
-import net.habraun.kong.util.PiccoUtil.updateSG
+import com.hannobraun.kong.Configuration
+
+import com.hannobraun.sd.World
 
 
 
-class Renderer extends Function1[ List[ EntityView ], Unit ] {
+class GameUpdater( config: Configuration ) extends Function4[ Double, World[ _ ], Ball, Score, Unit ] {
 
-	def apply( views: List[ EntityView ] ) {
-		// Display game state
-		updateSG( () => {
-			for ( view <- views ) {
-				view.update
-			}
-		} )
+	def apply( dt: Double, world: World[ _ ], ball: Ball, score: Score ) {
+		// Step the physics simulation
+		world.step( dt )
+
+		// Check if the ball left the field and needs to be placed in the middle again
+		val  ballX = ball.position.x
+		if ( ballX > config.screenSizeX ) {
+			score.increaseScore1
+			ball.init
+		}
+		if (ballX < 0) {
+			score.increaseScore2
+			ball.init
+		}
 	}
 }

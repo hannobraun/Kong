@@ -16,17 +16,17 @@
 
 
 
-package net.habraun.kong
+package com.hannobraun.kong
 
 
 
-import net.habraun.kong.game.GameSetup
-import net.habraun.kong.game.Score
-import net.habraun.kong.input.InputSetup
-import net.habraun.kong.ui.BallView
-import net.habraun.kong.ui.PaddleView
-import net.habraun.kong.ui.ScoreView
-import net.habraun.kong.ui.UISetup
+import com.hannobraun.kong.game.GameSetup
+import com.hannobraun.kong.game.Score
+import com.hannobraun.kong.input.InputSetup
+import com.hannobraun.kong.ui.BallView
+import com.hannobraun.kong.ui.PaddleView
+import com.hannobraun.kong.ui.ScoreView
+import com.hannobraun.kong.ui.UISetup
 
 import com.hannobraun.sd.World
 import com.hannobraun.sd.core.Body

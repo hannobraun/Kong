@@ -16,27 +16,32 @@
 
 
 
-package net.habraun.kong.input
+package com.hannobraun.kong
 
 
 
-import net.habraun.kong.game.Paddle
-
-import com.hannobraun.piccoinput.KeyHandler
-
+import java.awt.Stroke
+import java.awt.BasicStroke
 
 
-class InputProcessor extends Function2[ KeyHandler, List[ Paddle ], Unit ] {
 
-	def apply( keyHandler: KeyHandler, paddles: List[ Paddle ] ) {
-		// Process input
-		paddles.foreach( ( paddle ) => {
-			if ( keyHandler.isPressed( paddle.getPlayer, UpKey ) )
-				paddle.movementUp
-			else if ( keyHandler.isPressed( paddle.getPlayer, DownKey ) )
-				paddle.movementDown
-			else
-				paddle.movementStop
-		})
-	}
+trait Configuration {
+	def screenSizeX: Int
+	def screenSizeY: Int
+
+	def defaultStroke: Stroke
+
+	def dt: Double
+}
+
+
+
+object DefaultConfiguration extends Configuration {
+
+	val screenSizeX = 800
+	val screenSizeY = 600
+
+	val defaultStroke = new BasicStroke( 0 )
+
+	val dt = 1.0 / 50.0
 }

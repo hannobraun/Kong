@@ -16,12 +16,12 @@
 
 
 
-package net.habraun.kong.ui
+package com.hannobraun.kong.ui
 
 
 
-import net.habraun.kong.Configuration
-import net.habraun.kong.game.Paddle
+import com.hannobraun.kong.Configuration
+import com.hannobraun.kong.game.Ball
 
 import java.awt.Color
 import java.awt.geom.AffineTransform
@@ -31,8 +31,7 @@ import edu.umd.cs.piccolo.nodes.PPath
 
 
 
-class PaddleView( config: Configuration, val paddle: Paddle )
-		extends PPath( PaddleView.shape ) with EntityView{
+class BallView( config: Configuration, val ball: Ball ) extends PPath( BallView.shape ) with EntityView {
 
 	setPaint( Color.RED )
 	setStroke( config.defaultStroke )
@@ -40,15 +39,14 @@ class PaddleView( config: Configuration, val paddle: Paddle )
 
 
 	def update {
-		val x = paddle.position.x - Paddle.radius
-		val y = paddle.position.y - Paddle.radius
+		val x = ball.position.x - Ball.radius
+		val y = ball.position.y - Ball.radius
 		setTransform( AffineTransform.getTranslateInstance( x, y ) )
 	}
 }
 
 
 
-
-object PaddleView {
-	val shape = new Ellipse2D.Double( 0, 0, Paddle.radius * 2, Paddle.radius * 2 )
+object BallView {
+	val shape = new Ellipse2D.Double(0, 0, Ball.radius * 2, Ball.radius * 2)
 }

@@ -16,21 +16,14 @@
 
 
 
-package net.habraun.kong.util
+package com.hannobraun.kong.ui
 
 
 
-import javax.swing.SwingUtilities
+import edu.umd.cs.piccolo.PNode
 
 
 
-object PiccoUtil {
-
-	def updateSG( f: () => Unit ) {
-		SwingUtilities.invokeAndWait( new Runnable {
-			def run {
-				f.apply
-			}
-		} )
-	}
+trait EntityView extends PNode {
+	def update
 }

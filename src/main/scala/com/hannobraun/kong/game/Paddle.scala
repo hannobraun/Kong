@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.kong.game
+package com.hannobraun.kong.game
 
 
 
-import net.habraun.kong.Configuration
+import com.hannobraun.kong.Configuration
 
 import com.hannobraun.piccoinput.Player
 import com.hannobraun.sd.collision.shape.Circle

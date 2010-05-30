@@ -16,13 +16,13 @@
 
 
 
-package net.habraun.kong.game
+package com.hannobraun.kong.game
 
 
 
-import net.habraun.kong.Configuration
-import net.habraun.kong.input.PlayerLeft
-import net.habraun.kong.input.PlayerRight
+import com.hannobraun.kong.Configuration
+import com.hannobraun.kong.input.PlayerLeft
+import com.hannobraun.kong.input.PlayerRight
 
 import com.hannobraun.sd.math.Vector2
 

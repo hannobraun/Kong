@@ -16,14 +16,27 @@
 
 
 
-package net.habraun.kong.ui
+package com.hannobraun.kong.input
 
 
 
-import edu.umd.cs.piccolo.PNode
+import com.hannobraun.kong.game.Paddle
+
+import com.hannobraun.piccoinput.KeyHandler
 
 
 
-trait EntityView extends PNode {
-	def update
+class InputProcessor extends Function2[ KeyHandler, List[ Paddle ], Unit ] {
+
+	def apply( keyHandler: KeyHandler, paddles: List[ Paddle ] ) {
+		// Process input
+		paddles.foreach( ( paddle ) => {
+			if ( keyHandler.isPressed( paddle.getPlayer, UpKey ) )
+				paddle.movementUp
+			else if ( keyHandler.isPressed( paddle.getPlayer, DownKey ) )
+				paddle.movementDown
+			else
+				paddle.movementStop
+		})
+	}
 }

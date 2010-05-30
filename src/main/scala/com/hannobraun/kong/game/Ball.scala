@@ -16,7 +16,7 @@
 
 
 
-package net.habraun.kong.game
+package com.hannobraun.kong.game
 
 
 

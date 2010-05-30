@@ -16,31 +16,21 @@
 
 
 
-package net.habraun.kong.game
+package com.hannobraun.kong.util
 
 
 
-import net.habraun.kong.Configuration
-
-import com.hannobraun.sd.World
+import javax.swing.SwingUtilities
 
 
 
-class GameUpdater( config: Configuration ) extends Function4[ Double, World[ _ ], Ball, Score, Unit ] {
+object PiccoUtil {
 
-	def apply( dt: Double, world: World[ _ ], ball: Ball, score: Score ) {
-		// Step the physics simulation
-		world.step( dt )
-
-		// Check if the ball left the field and needs to be placed in the middle again
-		val  ballX = ball.position.x
-		if ( ballX > config.screenSizeX ) {
-			score.increaseScore1
-			ball.init
-		}
-		if (ballX < 0) {
-			score.increaseScore2
-			ball.init
-		}
+	def updateSG( f: () => Unit ) {
+		SwingUtilities.invokeAndWait( new Runnable {
+			def run {
+				f.apply
+			}
+		} )
 	}
 }

@@ -16,32 +16,21 @@
 
 
 
-package net.habraun.kong
+package com.hannobraun.kong.game
 
 
 
-import java.awt.Stroke
-import java.awt.BasicStroke
+import com.hannobraun.kong.Configuration
+
+import com.hannobraun.sd.collision.shape.LineSegment
+import com.hannobraun.sd.core.Body
+import com.hannobraun.sd.math.Vector2
 
 
 
-trait Configuration {
-	def screenSizeX: Int
-	def screenSizeY: Int
+class Border( config: Configuration, thePosition: Vector2 ) extends Body with LineSegment {
 
-	def defaultStroke: Stroke
-
-	def dt: Double
-}
-
-
-
-object DefaultConfiguration extends Configuration {
-
-	val screenSizeX = 800
-	val screenSizeY = 600
-
-	val defaultStroke = new BasicStroke( 0 )
-
-	val dt = 1.0 / 50.0
+	position = thePosition
+	mass = Double.PositiveInfinity
+	override val direction = Vector2( config.screenSizeX, 0 )
 }

@@ -16,7 +16,7 @@
 
 
 
-package net.habraun.kong.input
+package com.hannobraun.kong.input
 
 
 

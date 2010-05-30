@@ -16,7 +16,7 @@
 
 
 
-package net.habraun.kong
+package com.hannobraun.kong
 
 
 

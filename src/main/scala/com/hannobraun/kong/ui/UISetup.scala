@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.kong.ui
+package com.hannobraun.kong.ui
 
 
 
-import net.habraun.kong.Configuration
+import com.hannobraun.kong.Configuration
 
 import java.awt.Color
 import javax.swing.JFrame

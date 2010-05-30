@@ -16,24 +16,22 @@
 
 
 
-package net.habraun.kong.game
+package com.hannobraun.kong.ui
 
 
 
-class Score {
-
-	private var _score1 = 0
-	private var _score2 = 0
+import com.hannobraun.kong.util.PiccoUtil.updateSG
 
 
 
-	def score1 = _score1
+class Renderer extends Function1[ List[ EntityView ], Unit ] {
 
-	def score2 = _score2
-
-
-
-	def increaseScore1 = _score1 += 1
-
-	def increaseScore2 = _score2 += 1
+	def apply( views: List[ EntityView ] ) {
+		// Display game state
+		updateSG( () => {
+			for ( view <- views ) {
+				view.update
+			}
+		} )
+	}
 }
